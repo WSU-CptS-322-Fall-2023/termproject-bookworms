@@ -1,8 +1,7 @@
 # CptS 322 Term Project
-### Project Title: 
-### Team Name :  <enter your team name here> 
+### Project Title: Book App
+### Team Name :  BookWorms
 ### Team Members 
-* member 1
-* member 2
-* member 3
-* member 4
+Clara Greer
+Tyler Lighthall
+Cristobal Escobar
