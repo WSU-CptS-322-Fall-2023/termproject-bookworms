@@ -1,12 +1,12 @@
 # Software Requirements Specification
 
-## Your Project Title
+## Book App
 --------
 Prepared by:
 
-* `Clara Greer`,`<organization>`
-* `Tyler Lighthall`,`<organization>`
-* `Cristobal Escobar`,`<organization>`
+* `Clara Greer`,`WSU CPTS Student`
+* `Tyler Lighthall`,`WSU CPTS Student`
+* `Cristobal Escobar`,`WSU CPTS Student`
 
 ---
 
@@ -18,7 +18,7 @@ Prepared by:
 
 ## Table of Contents
 - [Software Requirements Specification](#software-requirements-specification)
-  - [Your Project Title](#your-project-title)
+  - [Book App](#book-app)
   - [Table of Contents](#table-of-contents)
   - [Document Revision History](#document-revision-history)
 - [1. Introduction](#1-introduction)
@@ -51,23 +51,18 @@ This document will outline all of the requirements for the Book App.
 
 ## 1.1 Document Purpose
 
-Describe the purpose of the Software Requirement Specification (SRS) document and its intended audience.
-The purpose of this Software Requirement Specification document is to clearly outline the 
+The purpose of this Software Requirement Specification document is to clearly outline and document the creation of the Book App.
 
 ## 1.2 Product Scope
 
-Identify the product whose software requirements are specified in this document. Explain what the product that is covered by this SRS will do. Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals.
+The Book App is an app that lets a user post and read reviews about their favorite (or not so favorite) books. Users can share their ideas about books they read by posting reviews, or read others opinions on books and decide to like those reviews if they agree. This will be helpful for other bookworms by being able to: to see what their fellow users think about a book and help decide if they want to read that book; meet other people with similar interests in books; and the user could even use this app as a personal log of all the books they read. The goal is bring bookworms together and encourage community and reading!
 
 ## 1.3 Document Overview
 
-Describe what the rest of the document contains and how it is organized.
+This document includes the specific requirements, an overlay of all the use cases, and other general information important to the implementation to the Book App; all of which organized in their own tables and sections.
 
 ----
 # 2. Requirements Specification
-
-This section specifies the software product's requirements. Specify all of the software requirements to a level of detail sufficient to enable designers to design a software system to satisfy those requirements, and to enable testers to test that the software system satisfies those requirements.
-
-The book app must have:
 
 * Login/logout 
   * Two types of accounts can log in (admin or user).
@@ -92,88 +87,194 @@ The book app must have:
 
 ## 2.1 Customer, Users, and Stakeholders
 
-A brief description of the customer, stakeholders, and users of your software.
-
-The customer, stakeholders, and users are anyone who has an interest in reading; from the avid bookworm to someone who wants to get into reading.
+The customer, stakeholders, and users are anyone who has an interest in reading; from the avid bookworm to someone who is just starting to get into reading.
 
 ----
 ## 2.2 Use Cases
 
-This section will include the specification for your project in the form of use cases. The section should start with a short description of the actors involved (e.g., regular user, administrator, etc.) and then follow with a list of the use cases.
-
-For each use case you should have the following:
-
-* Name,
-* Actors,
-* Triggers (what initiates the use case),
-* Preconditions (in what system state is this use case applicable),
-* Actions (what actions will the code take to implement the use case),
-* Alternative paths
-* Postconditions (what is the system state after the use case is done),
-* Acceptance tests (list one or more acceptance tests with concrete values for the parameters, and concrete assertions that you will make to verify the postconditions).
-
-Each use case should also have a field called "Iteration" where you specify in which iteration you plan to implement this feature.
-
-You may use the following table template for your use cases. Copy-paste this table for each use case you will include in your document.
-
 ~~~ Actors ~~~
-Logged-in user      - A user logged in with a regular user account.
-Not-logged-in user  - A user not logged in. 
-Admin               - A user logged into an admin account
+LIU   - A user logged in with a regular user account.
+NIU   - A user not logged in. 
+Admin - A user logged into an admin account
 
 | Use case # 1      |   |
 | ------------------ |--|
-| Name              | "enter your reponse here"  |
-| Users             | "enter your reponse here"  |
-| Rationale         | "enter your reponse here"  |
-| Triggers          | "enter your reponse here"  |
-| Preconditions     | "enter your reponse here"  |
-| Actions           | "enter your reponse here"  |
-| Alternative paths | "enter your reponse here"  |
-| Postconditions    | "enter your reponse here"  |
-| Acceptance tests  | "enter your reponse here"  |
-| Iteration         | "enter your reponse here"  |
+| Name              | Post review  |
+| Users             | LIU  |
+| Rationale         | For a user to post a book review.  |
+| Triggers          | When a LUI selects a create post button on the home, posts, or profile page.   |
+| Preconditions     | User must be logged in.  |
+| Actions           | Redirect to the create review page, user must select a book and star rating, then if they choose they can write a small review and add tags.  |
+| Alternative paths | If the book the user wants to review isn't listed they will be prompted with adding a new one to the library.  |
+| Postconditions    | The review will posted to the main page. User will be directed to the home page. |
+| Acceptance tests  | When the review is posted it will be added to the user's posts and the book's reviews. (in the database)  |
+| Iteration         | 1 (fully when login is implemented) |
 
-| Use case # 1      |   |
+| Use case # 2      |   |
 | ------------------ |--|
-| Name              | "enter your reponse here"  |
-| Users             | "enter your reponse here"  |
-| Rationale         | "enter your reponse here"  |
-| Triggers          | "enter your reponse here"  |
-| Preconditions     | "enter your reponse here"  |
-| Actions           | "enter your reponse here"  |
-| Alternative paths | "enter your reponse here"  |
-| Postconditions    | "enter your reponse here"  |
-| Acceptance tests  | "enter your reponse here"  |
-| Iteration         | "enter your reponse here"  |
+| Name              | Add new book  |
+| Users             | LUI, Admin  |
+| Rationale         | If a desired book is not in the book app library, an admin or LUI can add it to the library.  |
+| Triggers          | For LUI -> When creating a review if the desired book is not in the library they can choose to add it. For Admin -> when maintaining the cite, the admin can choose to add books to the library.   |
+| Preconditions     | user must be logged in  |
+| Actions           | The book requires the book title an author, then is added to the book library.  |
+| Alternative paths | Admin path explained above.  |
+| Postconditions    | New book is added to the library.  |
+| Acceptance tests  | When a book is added, it is added to the database.  |
+| Iteration         | 1 (fully when login is implemented)  |
+
+| Use case # 3      |   |
+| ------------------ |--|
+| Name              | Homepage  |
+| Users             | LIU, NIU, Admin  |
+| Rationale         | To access the home page.  |
+| Triggers          | When user presses the home button.  |
+| Preconditions     | None, this can be done at any time.  |
+| Actions           | Redirects user to the homepage.  |
+| Alternative paths | None.  |
+| Postconditions    | Displays homepage with most recent reviews.  |
+| Acceptance tests  |   |
+| Iteration         | 1 |
+
+| Use case # 4      |   |
+| ------------------ |--|
+| Name              | Like review  |
+| Users             | LIU  |
+| Rationale         | To like a review.  |
+| Triggers          | When pressing a reviews like button.  |
+| Preconditions     | User must be logged in to like a review.  |
+| Actions           | Updates a reviews like count and displays to page.  |
+| Alternative paths | None.  |
+| Postconditions    | Displays like count to page.  |
+| Acceptance tests  | When like button is pressed, it should add one like to the review.  |
+| Iteration         | 1 (fully when login is implemented)  |
+
+| Use case # 5      |   |
+| ------------------ |--|
+| Name              | Login  |
+| Users             | NIU  |
+| Rationale         | For a user to interact with reviews or post their own they must log in.  |
+| Triggers          | When pressing the profile button when not logged in.  |
+| Preconditions     | No user is logged in. |
+| Actions           | Redirect to log in page and prompt to log in. User can log in with username and password or register an account (see case #6). |
+| Alternative paths | User registers an account, then logs in.  |
+| Postconditions    | User logged in NIU -> LIU.  |
+| Acceptance tests  | A value can be returned when user is correctly logged in.   |
+| Iteration         | 2  |
+
+| Use case # 6      |   |
+| ------------------ |--|
+| Name              | Create account  |
+| Users             | NIN  |
+| Rationale         | To interact with reviews and post a review a user has top log in, and to do that a user has to have a registered account.  |
+| Triggers          | When selecting the register account hyperlink in the login page.  |
+| Preconditions     | User cannot be logged in.  |
+| Actions           | The user must input a unique email and username, then may choose to supply other information.  |
+| Alternative paths | If user is registering as an admin they will specify with a dropdown box.  |
+| Postconditions    | The account is registered and the user can then log in with it.  |
+| Acceptance tests  | When the account is registered it will be added to the user database.  |
+| Iteration         | 2  |
+
+| Use case # 7      |   |
+| ------------------ |--|
+| Name              | Display profile  |
+| Users             | LIU, Admin  |
+| Rationale         | To look at all of the logged in profile information.  |
+| Triggers          | when selecting the profile button as a logged in user or admin.  |
+| Preconditions     | Must be logged in.  |
+| Actions           | Re-directs to the user info page and displays current users info.  |
+| Alternative paths | None.  |
+| Postconditions    | Displays user information.  |
+| Acceptance tests  | Displays correct user information.  |
+| Iteration         | 2  |
+
+| Use case # 8      |   |
+| ------------------ |--|
+| Name              | Logout  |
+| Users             | LIU, Admin  |
+| Rationale         | To log out of the cite  |
+| Triggers          | When pressing the logout button in the display profile page.  |
+| Preconditions     | Must be logged in to log out.  |
+| Actions           | Logs out user and redirects them back to the home page.  |
+| Alternative paths | None.  |
+| Postconditions    | No current user will be logged in.  |
+| Acceptance tests  | No current user should be shown as logged in.  |
+| Iteration         | 2  |
+
+| Use case # 9      |   |
+| ------------------ |--|
+| Name              | Filter posts  |
+| Users             | LIU, NIU, Admin  |
+| Rationale         | To look at posts sorted in a specific way.  |
+| Triggers          | When selected from a dropdown box of filter options and submitted.  |
+| Preconditions     | Must be on home page or reviews page.  |
+| Actions           | Will redirect to review page with the reviews sorted in the selected fashion.  |
+| Alternative paths | None.  |
+| Postconditions    | Displayed sorted reviews.  |
+| Acceptance tests  | Displayed correctly sorted reviews.  |
+| Iteration         | 3  |
+
+| Use case # 10      |   |
+| ------------------ |--|
+| Name              | Search  |
+| Users             | LIU, NIU, Admin  |
+| Rationale         | To look for specific reviews.  |
+| Triggers          | User will type the a desired phrase and submit.  |
+| Preconditions     | Must be on home page or reviews page.  |
+| Actions           | Will redirect to review page with all the reviews that contain that phrase or word.  |
+| Alternative paths | If no reviews match the given input, will redirect to reviews page with a flash message.  |
+| Postconditions    | Displayed reviews containing desired phrase/word.  |
+| Acceptance tests  | Displayed correct reviews.  |
+| Iteration         | 3  |
+
+| Use case # 11      |   |
+| ------------------ |--|
+| Name              | Edit Profile  |
+| Users             | LIU, Admin  |
+| Rationale         | To change details of user information.  |
+| Triggers          | When selecting change info button.  |
+| Preconditions     | Must be logged in and on profile information page.  |
+| Actions           | User can edit all information (except username and email) and resubmit  |
+| Alternative paths | None.  |
+| Postconditions    | User will have new updated information displayed to the profile info page.  |
+| Acceptance tests  | User data will be changed in the database.  |
+| Iteration         | 3  |
+
+| Use case # 12      |   |
+| ------------------ |--|
+| Name              | Delete review  |
+| Users             | LIU, Admin  |
+| Rationale         | To delete a post.  |
+| Triggers          | When looking at your own reviews you can choose to delete a review.  |
+| Preconditions     | Must be logged in and have access to own reviews whether that is though user info page, home page, or reviews page.  |
+| Actions           | Deletes post from the database.  |
+| Alternative paths | Admin can delete any post, does not have to be the user that posted it. This is to moderate the reviews.  |
+| Postconditions    | The page will reload with the correct posts listed.  |
+| Acceptance tests  | The post will no longer be in the database.  |
+| Iteration         | 3  |
 
 ----
 ## 2.3 Non-Functional Requirements
 
-List the non-functional requirements in this section.
-
-You may use the following template for non-functional requirements.
-
-1. [Enter a Concise Requirement Name]:  [provide a concise description, in clear and easily understandable language to specify the requirement]
+1. [Usability]:  [Book App will be easy to navigate for any user.]
+1. [Loadtime]:  [Book App will not take any longer than five seconds to load a page.]
+1. [Scaleability]:  [Book App will be able to handle a thousand user at a time.]
 
 ----
 # 3. User Interface
 
-Here you should include the sketches or mockups for the main parts of the interface.
+![reqImages](GenPageLayout.jpeg)
 
 ----
 # 4. Product Backlog
 
-Here you should include a link to your GitHub repo issues page, i.e., your product backlog. Make sure to create an issue for each use case. You should also create issues for the initial development tasks that you plan to work on during iteration1. 
+https://github.com/WSU-CptS-322-Fall-2023/termproject-bookworms.git
+
+10/11/23 - Completed Requirement Doc
 
 ----
 # 4. References
 
-Cite your references here.
-
-For the papers you cite give the authors, the title of the article, the journal name, journal volume number, date of publication and inclusive page numbers. Giving only the URL for the journal is not appropriate.
-
-For the websites, give the title, author (if applicable) and the website URL.
 
 ----
 ----
