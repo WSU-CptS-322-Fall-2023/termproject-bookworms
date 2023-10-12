@@ -93,9 +93,9 @@ The customer, stakeholders, and users are anyone who has an interest in reading;
 ## 2.2 Use Cases
 
 Actors
-LIU   - A user logged in with a regular user account.
-NIU   - A user not logged in. 
-Admin - A user logged into an admin account
+- LIU   - A user logged in with a regular user account.
+- NIU   - A user not logged in. 
+- Admin - A user logged into an admin account
 
 | Use case # 1      |  |
 | ------------------|--|
@@ -263,7 +263,7 @@ Admin - A user logged into an admin account
 ----
 # 3. User Interface
 
-![reqImages](GenPageLayout.jpeg)
+![](GenPageLayout.jpeg)
 
 ----
 # 4. Product Backlog
