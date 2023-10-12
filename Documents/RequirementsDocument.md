@@ -92,13 +92,13 @@ The customer, stakeholders, and users are anyone who has an interest in reading;
 ----
 ## 2.2 Use Cases
 
-~~~ Actors ~~~
+Actors
 LIU   - A user logged in with a regular user account.
 NIU   - A user not logged in. 
 Admin - A user logged into an admin account
 
-| Use case # 1      |   |
-| ------------------ |--|
+| Use case # 1      |  |
+| ------------------|--|
 | Name              | Post review  |
 | Users             | LIU  |
 | Rationale         | For a user to post a book review.  |
