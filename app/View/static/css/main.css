@@ -1,0 +1,185 @@
+body {
+    margin: 1px 1px 1px 15px;
+    padding: 1px;
+    font-family: Tahoma;
+    text-align: left;
+  
+}
+.nav-container {
+    background:#f6f6f6;
+    font-family: Tahoma;
+    font-size: 12px;
+    height: 32px;
+    text-transform: uppercase;
+}
+a:hover {
+	color:#2387D9;
+}
+
+.button {
+    width : 65px;
+    padding : 3px;    
+    font-size: 16px;
+    margin : 5px;
+    padding : 5px;
+    border: 1px solid lightgray;
+}
+.button:hover {
+    background-color: 157dd3;
+    color: white;
+    cursor:pointer;
+}
+
+.posttable { 
+    width : 100%;
+    margin: 0px;
+}
+
+.posttitle {
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 18px;
+    padding: 2px;
+}
+
+.posttimestamp {
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+    font-weight: lighter;
+    padding: 2px;
+}
+
+.postmessage {
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+    padding: 2px;
+}
+
+.tagitem{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 14px;
+    padding: 2px;
+    background-color: #9ee048;
+}
+
+.likecount {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+	font-size: 20px;
+    padding: 2px;
+}
+
+.formtitle{
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+    padding: 2px;
+    width: 400px;
+}
+
+.formbody{
+    text-align: left;
+	padding: 2px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 18px;
+	width: 400px;
+}
+
+.formselect{
+    text-align: left;
+	padding: 2px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 18px;
+	width: 200px;
+}
+
+.forminput{
+    text-align: left;
+	padding: 2px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 18px;
+	width: 50%;
+}
+
+.useritem{
+    text-align: center;
+    padding: 3px;
+    margin: 4px 3px 4px 3px;
+    color: crimson; 
+    text-transform: uppercase;
+}
+
+.likebtn {
+    margin: 0 auto;
+    height: 40px;
+    width: 50px;
+    border: 0px;
+    vertical-align: middle;
+    background-image: url("..//img//like.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+} 
+.likebtn:hover {
+    background-image: url("..//img//like_hover.png");
+    cursor:pointer;
+}
+
+.flash-container{
+	background: #99C5EE;
+	font-family: Tahoma;
+	font-size: 16px;
+	padding: 25px;
+	margin: 10px 0px 10px 0px;
+}
+
+.postlist{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.postbox{
+    display: flex; 
+    vertical-align: middle;
+    background-color: #f0f3f7;
+    width: 20%;
+    margin: 5px 5px 5px 5px;
+}
+
+@media screen and (min-width: 800px) and (max-width:1200px){
+    .postbox{
+        display: flex; 
+        vertical-align: middle;
+        background-color: #f0f3f7;
+        width: 48%;
+        margin: 5px 5px 5px 5px;
+    }
+}
+
+@media screen and (max-width:800px){
+    .postbox{
+        display: flex; 
+        vertical-align: middle;
+        background-color: #f0f3f7;
+        width: 99%;
+        margin: 5px 5px 5px 5px;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .postbox{
+        display: flex; 
+        vertical-align: middle;
+        background-color: #f0f3f7;
+        width: 32%;
+        margin: 5px 5px 5px 5px;
+    }
+}
+
