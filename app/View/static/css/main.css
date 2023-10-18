@@ -35,8 +35,16 @@ a:hover {
     margin: 0px;
 }
 
+.postbooktitle {
+    text-align: left;
+    font-weight: lighter;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 14px;
+    padding: 2px;
+}
+
 .posttitle {
-    text-align: center;
+    text-align: left;
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	font-size: 18px;

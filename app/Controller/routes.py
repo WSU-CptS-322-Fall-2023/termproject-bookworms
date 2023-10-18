@@ -18,3 +18,14 @@ def index():
     reviews = Review.query.order_by(Review.timestamp.desc())
     print(reviews)
     return render_template('index.html', title="Book App", reviews=reviews)
+
+@bp_routes.route('/postreview', methods=['GET', 'POST'] )
+def postReview():
+    rform = ReviewForm()
+    if rform.validate_on_submit():
+        review = Review(title = rform.title.data, body = rform.body.data)
+        db.session.add(review)
+        db.session.commit()
+        flash('post successfully created!')
+        return redirect(url_for('routes.index')) 
+    return render_template('create.html', form = rform)
