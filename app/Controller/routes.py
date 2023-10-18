@@ -16,4 +16,5 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
 @bp_routes.route('/index', methods=['GET'])
 def index():
     reviews = Review.query.order_by(Review.timestamp.desc())
-    return render_template('index.html', title="Smile Portal", reviews=reviews.all())
+    print(reviews)
+    return render_template('index.html', title="Book App", reviews=reviews)

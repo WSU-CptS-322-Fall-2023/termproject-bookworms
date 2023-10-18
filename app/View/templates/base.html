@@ -1,25 +1,22 @@
 <html>
     <head>
        {% if title %}
-          <title>{{ title }} - Smile </title>
+          <title>{{ title }} - Book App </title>
        {% else %}
-          <title> Welcome to Smile Portal! </title>
+          <title> Welcome to Book App! </title>
        {% endif %}
        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-       <!--TODO: (milestone 3)  Include `moment` library -->
+
     </head>
 
     <body>
         <div class ="nav-container">
         <table>
             <tr>
-                <td><a href="{{ url_for('routes.index') }}" class = "button">Smiles</a></td>
-                <!-- TODO: (milestone 1) add the URL for the "Post Smile". --> 
-                <td><a href="" class = "button"> Post Smile </a></td>
-                <!-- TODO: (milestone 3) add the "Login" or "Logout" link. If the user is logged in, Login link should be displayed, otherwise Logout link should be displayed. --> 
+                <td><a href="{{ url_for('routes.index') }}" class = "button">Home</a></td>
+                <td><a href="" class = "button"> Post Review </a></td>  
                 <td><a href="" class = "button"> Login </a></td>
                 <td><a href="" class = "button"> Logout </a></td>
-                <!-- TODO: (milestone 3) Replace "_______" below with the username of the current user.-->
                 <td> Current user is: <span class="useritem">________ </span> </td>  
             </tr>
         </table>
