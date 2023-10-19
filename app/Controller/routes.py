@@ -27,7 +27,7 @@ def index():
 def addbook():
     bform = BookForm()
     if bform.validate_on_submit():
-        newBook = Book(title=bform.title.data, author=bform.author.data)
+        newBook = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year)
         db.session.add(newBook)
         db.session.commit()
 
