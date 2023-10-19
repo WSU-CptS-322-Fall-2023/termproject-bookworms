@@ -6,6 +6,8 @@
         "Escobar",
         "Lighthall",
         "Postconditions",
-        "posttable"
+        "postreview",
+        "posttable",
+        "rform"
     ]
 }
