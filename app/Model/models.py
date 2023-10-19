@@ -24,3 +24,13 @@ class User(UserMixin):
 
     def get_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+
+class Book(db.Model):     ##### not sure if the relationship is how this works? #####
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(150))
+    author = db.Column(db.String(30))
+    #year = db.Column(db.Integer, default=1)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    # reviews = db.relationship('Review', back_populates="book")
