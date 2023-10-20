@@ -14,31 +14,7 @@ class Review(db.Model):
     likes = db.Column(db.Integer, default = 0)
     # book = db.Column(db.Integer, db.ForeignKey('book.id'))
 
-    #book = db.relationship('BookReview', back_populates="_review")
-
-class Book(db.Model):     ##### not sure if the relationship is how this works? #####
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150))
-    author = db.Column(db.String(30))
-    # rev = db.relationship('Review', backref='reviewBook', lazy='dynamic')
-    #reviews = db.relationship('BookReview', back_populates="_book")
-    reviews = db.relationship('Review', secondary = reviewBook, primaryjoin=(reviewBook.c.book_id == id), 
-                           backref=db.backref('reviewBook', lazy='dynamic'), lazy='dynamic' )
-    def __repr__(self):
-        return '<id: {} - title: {}, author: {}>'.format(self.id, self.title, self.author)
-
-    def getTitle(self):
-        return self.title
-
-
-# class BookReview(db.Model):
-#     bookTitle = db.Column(db.String(150), db.ForeignKey('book.title'), primary_key = True)
-#     reviewId = db.Column(db.Integer,db.ForeignKey('review.id'), primary_key = True)
-#     primary = db.Column(db.Boolean)
-#     _review = db.relationship('Review')
-#     _book = db.relationship('Book')
-#     def __repr__(self):
-#         return '<BookReview ({}, {}, {})>'.format(self.bookTitle, self.reviewId, self.primary)
+    #book = db.relationship('BookReview', back_populates="_review"
 
 
 class User(UserMixin): 
@@ -63,6 +39,14 @@ class Book(db.Model):     ##### not sure if the relationship is how this works? 
     author = db.Column(db.String(30))
     year = db.Column(db.Integer, db.ForeignKey('year.year'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    reviews = db.relationship('Review', secondary = reviewBook, primaryjoin=(reviewBook.c.book_id == id), 
+                           backref=db.backref('reviewBook', lazy='dynamic'), lazy='dynamic' )
+    def __repr__(self):
+        return '<id: {} - title: {}, author: {}>'.format(self.id, self.title, self.author)
+
+    def getTitle(self):
+        return self.title
 
     # reviews = db.relationship('Review', back_populates="book")
 

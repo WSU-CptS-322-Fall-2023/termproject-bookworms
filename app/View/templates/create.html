@@ -2,15 +2,13 @@
 
 {% block content %}
 
-    <h1>Post New Book Review</h1>
+    <h1> Review for {{ book.title }}</h1>
 
     {% if form %}
 
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <div>
-
-                {{ form.book.label }} {{ form.book(class="formselect") }}<br>
 
                 {{ form.title.label }}<br>
                 {{ form.title(class="formtitle") }}<br>

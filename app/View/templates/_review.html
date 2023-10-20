@@ -1,47 +1,72 @@
-<table class = "posttable" style = "width:100%" valign="top">
-        <tr> 
-            {{review.book}}
 
-            <td colspan="3"><div class="posttitle"> {{review.title}} </div>
-            <td colspan="3"><div class="postbooktitle"> {{review.book}} </div>
-            </td>
-        </tr>
-        <tr>
+<!-- <div> Blank </div> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
-            <td width="80%" >
-                <div class="postmessage">
+{%  if reviews.count() == 0 %}
+    <div class="postbox"> 
+        <h1> No Reviews Yet </h1>
+    </div>
 
-                  {{ review.body }}
+{%else%}
 
-               </div>
-               <div class="posttimestamp"> 
-                  Posted at: {{ reviews.timestamp }}
-               </div> 
-            </td> 
+    <h1> {{ book.title }}'s Reviews</h1>
+    {% for review in reviews %}
+        <div class="postbox">
+            <table class = "posttable" style = "width:100%" valign="top">
+                    <tr> 
+                        {{review.book}}
 
-            <td width = "5%"> 
-                <div class="likecount">
+                        <td colspan="3"><div class="posttitle"> {{review.title}} </div>
+                        <td colspan="3"><div class="postbooktitle"> {{review.book}} </div>
+                        </td>
+                    </tr>
+                    <tr>
 
-                    <br>
-                    {{ review.likes }}
+                        <td width="80%" >
+                            <div class="postmessage">
+
+                            {{ review.body }}
+
+                        </div>
+                        <div class="posttimestamp"> 
+                            Posted at: {{ reviews.timestamp }}
+                        </div> 
+                        </td> 
+
+                        <td width = "5%"> 
+                            <div class="likecount">
+
+                                <br>
+                                {{ review.likes }}
+                                
+                            </div>
+                            <br> 
+                        </td>
+                    </tr>
                     
-                </div>
-                <br> 
-            </td>
-        </tr>
-        
-        <tr> 
-            <td colspan="3" style = "text-align:center" valign="bottom">  
-                <br>
+                    <tr> 
+                        <td colspan="3" style = "text-align:center" valign="bottom">  
+                            <br>
 
-            </td>
-        </tr>
+                        </td>
+                    </tr>
 
-        <tr>
-            <td colspan="3" style = "text-align:center" valign="bottom">  
-                <br>
+                    <tr>
+                        <td colspan="3" style = "text-align:center" valign="bottom">  
+                            <br>
 
-              </td>
-            </tr>
-        </tr>
-    </table>
+                        </td>
+                        </tr>
+                    </tr>
+
+            </table>
+        </div>
+
+    {% endfor %}
+
+{%  endif %}
+<br>
+<br>
+<a href="{{url_for('routes.index')}}" class = "button"> Return to main page </a>
+
+    

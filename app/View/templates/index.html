@@ -7,14 +7,16 @@
     <div class="postlist"> 
 
 
-    {% for review in reviews %}
+    <!-- {% for review in reviews %}
         <div class="postbox">
             {% include '_review.html' %} 
         </div>
-    {% endfor %}
+    {% endfor %} -->
 
     {% for book in books %}
-        {% include '_book.html' %}
+        <div class="postbox">
+            {% include '_book.html' %}
+        </div>
     {% endfor %}
 
     </div> 

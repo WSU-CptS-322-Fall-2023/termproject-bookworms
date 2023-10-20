@@ -21,8 +21,8 @@ class ReviewForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])  
     submit = SubmitField('Post')
     body = TextAreaField('Body', [Length(min=1, max=1500)]) 
-    book = QuerySelectField('Book', query_factory = get_book, get_label = get_booklabel, allow_blank = False)
-    body = TextAreaField('Body', [Length(min=1, max=1500)])
+    # book = QuerySelectField('Book', query_factory = get_book, get_label = get_booklabel, allow_blank = False)
+    # body = TextAreaField('Body', [Length(min=1, max=1500)])
 
 class BookForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
