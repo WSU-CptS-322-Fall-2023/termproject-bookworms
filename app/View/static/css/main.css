@@ -124,11 +124,11 @@ a:hover {
 
 .likebtn {
     margin: 0 auto;
-    height: 40px;
-    width: 50px;
+    height: 60px;
+    width: 70px;
     border: 0px;
     vertical-align: middle;
-    background-image: url("..//img//like.png");
+    background-image: url("..//images//heart.png");
     background-repeat: no-repeat;
     background-size: contain;
     -webkit-background-size: contain;
@@ -136,7 +136,7 @@ a:hover {
     -o-background-size: contain;
 } 
 .likebtn:hover {
-    background-image: url("..//img//like_hover.png");
+    background-image: url("..//images//heart_hover.png");
     cursor:pointer;
 }
 

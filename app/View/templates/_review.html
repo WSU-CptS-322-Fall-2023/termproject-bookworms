@@ -29,12 +29,16 @@
 
                         </div>
                         <div class="posttimestamp"> 
-                            Posted at: {{ reviews.timestamp }}
+                            Posted at: {{ review.timestamp }}
                         </div> 
                         </td> 
 
                         <td width = "5%"> 
                             <div class="likecount">
+                                <form  action="{{url_for('routes.like', review_id = review.id, book_id=book.id)}}" method="post" >
+                                    <input class="likebtn" type="submit" value="" >
+                
+                                    </form>
 
                                 <br>
                                 {{ review.likes }}

@@ -60,3 +60,14 @@ def reviews(book_id):
 
     return render_template('_review.html', reviews = book.reviews, book = book)
 
+
+@bp_routes.route('/like/<review_id> <book_id>', methods=['POST'])
+# @login_required
+def like(review_id, book_id):
+    theReview = Review.query.filter_by(id = review_id).first()
+    theReview.likes = theReview.likes + 1
+    db.session.add(theReview)
+    db.session.commit()
+
+    return redirect(url_for('routes.reviews', book_id=book_id))
+
