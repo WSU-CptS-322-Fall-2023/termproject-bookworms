@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.Model.models import Review, User, Book
+from app.Model.models import Review, User, Book, Year
 
 app = create_app()
 
@@ -18,6 +18,10 @@ def initDB(*args, **kwargs):
                     ]
             for t in books:
                 db.session.add(Book(title=t['title'],author=t['author']))
+        if Year.query.count() == 0:
+            for i in range(2023, 1949, -1):
+                db.session.add(Year(year=i))
+
             db.session.commit()
 
 if __name__ == "__main__":
