@@ -1,0 +1,55 @@
+<table class = "posttable" style = "width:100%" valign="top">
+        <tr> 
+            <td colspan="3" ><div class="posttitle"> {{book.title}}  </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom"> 
+                <div> <br> 
+                    By {{ book.author }} ({{book.year}}) </div>
+            </td> 
+        </tr>
+
+        
+        <td width="80%" >
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+            <div class="posttimestamp"> 
+                <br>
+                Posted at: {{ book.timestamp }}
+            </div> 
+            </td>
+        </tr>
+            
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                Post by:
+                <span class="useritem"> ... </span>
+            </td>
+            </tr>
+        </tr>
+
+        
+        <td width = "20%">
+            <tr>
+                <td colspan="3" style = "text-align:center" valign="bottom">  
+                    <br>
+            <a href="{{url_for('routes.reviews', book_id=book.id)}}"> Reviews </a>
+        </td>
+
+            </tr>
+            <br>
+            <br>
+
+            <tr>
+                <td colspan="3" style = "text-align:center" valign="bottom">  
+                    <br>
+            <a href="{{url_for('routes.postReview', book_id = book.id)}}"> Add Review </a>
+        </td>
+
+            </tr>
+        </td>
+
+</table>

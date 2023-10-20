@@ -7,12 +7,19 @@ from flask_login import UserMixin
 def load_user(id):
     return User.query.get(int(id))
 
+reviewBook = db.Table('reviewBook', db.Column('book_id', db.Integer, db.ForeignKey('book.id')),
+                    db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     body = db.Column(db.String(1500))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     likes = db.Column(db.Integer, default = 0)
+    # book = db.Column(db.Integer, db.ForeignKey('book.id'))
+
+    #book = db.relationship('BookReview', back_populates="_review"
+
 
 class User(UserMixin, db.Model): 
     id = db.Column(db.Integer, primary_key=True)
@@ -53,4 +60,29 @@ class Regular_User(User):
     __mapper_args__ = {
         'polymorphic_identity': 'Reg_User'
     }
+
+
+    
+
+class Book(db.Model):     ##### not sure if the relationship is how this works? #####
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(150))
+    author = db.Column(db.String(30))
+    year = db.Column(db.Integer, db.ForeignKey('year.year'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    reviews = db.relationship('Review', secondary = reviewBook, primaryjoin=(reviewBook.c.book_id == id), 
+                           backref=db.backref('reviewBook', lazy='dynamic'), lazy='dynamic' )
+    def __repr__(self):
+        return '<id: {} - title: {}, author: {}>'.format(self.id, self.title, self.author)
+
+    def getTitle(self):
+        return self.title
+
+    # reviews = db.relationship('Review', back_populates="book")
+
+class Year(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer)
+    books = db.relationship('Book', backref='bookyear', lazy='dynamic')
 
