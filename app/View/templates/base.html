@@ -13,6 +13,7 @@
         <div class ="nav-container">
         <table>
             <tr>
+                <br>
                 <td><a href="{{ url_for('routes.index') }}" class = "button">Home</a></td>
                 <td><a href="{{url_for('routes.addbook')}}" class = "button"> Add Book </a></td> 
                 {% if current_user.is_anonymous %}
