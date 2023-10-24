@@ -45,9 +45,9 @@ Prepared by:
 
 # 1. Introduction
 
-Explain the purpose for providing this design document. If this is a revision of an earlier document, please make sure to summarize what changes have been made during the revision (keep this discussion brief). 
+This design document will show the blueprint for the Book App.
 
-Then provide a brief description of your project and state your project goal.
+This project is the Book App, an app where users can read and write reviews for their favorite books.
 
 At the end of the introduction, provide an overview of the document outline.
 
@@ -58,13 +58,33 @@ At the end of the introduction, provide an overview of the document outline.
 # 2.	Architectural and Component-level Design
 ## 2.1 System Structure
 
-This section should describe the high-level architecture of your software:  i.e., the major subsystems and how they fit together. 
-If you adopted the application structure we used in the Smile App, your application would have the Model-View-Controller (MVC) pattern. If you adopted a different architectural pattern, mention the pattern you adopted in your software and briefly discuss the rationale for using the proposed architecture (i.e., why that pattern fits well for your system).
-
 In this section:
  * Provide a UML component diagram that illustrates the architecture of your software.
- * Briefly mention the role of each subsystem in your architectural design. 
- * Discuss the rationale for the proposed decomposition in terms of  coupling and re-use.
+
+![UML_Diagram2](https://github.com/WSU-CptS-322-Fall-2023/termproject-bookworms/assets/122507199/5a36261c-095b-422d-a911-d97bc96a20aa)
+
+* Briefly mention the role of each subsystem in your architectural design.
+  
+1. Routes
+   Role:
+   - Create new forms and redirects and displays html pages.
+  
+2. Authorization Routes
+   Role:
+   - Create new authorization forms for admin and regular users and redirects and displays login and register html pages.
+
+3. Forms
+   Role:
+   - Creates forms for new books and new reviews.
+  
+3. Authorization Forms
+   Role:
+   - Creates forms for registration and login for users.
+   
+* Discuss the rationale for the proposed decomposition in terms of  coupling and re-use.
+
+This section should describe the high-level architecture of your software:  i.e., the major subsystems and how they fit together. 
+If you adopted the application structure we used in the Smile App, your application would have the Model-View-Controller (MVC) pattern. If you adopted a different architectural pattern, mention the pattern you adopted in your software and briefly discuss the rationale for using the proposed architecture (i.e., why that pattern fits well for your system).
 
 ## 2.2 Subsystem Design 
 
@@ -212,7 +232,47 @@ bp_auth Subsystem:
 
 Briefly explain the role of the view. Explain how you plan to build the user interfaces and mention the frameworks/libraries you plan to use (e.g., Bootstrap).  
 
+The view of Book App will be used to give users easy access to all the features of the Book App. We right now are just using the HTML frameworks, but soon will use Bootstrap to create a clean UI.
+
 Provide a list of the page templates you plan to create (or you already created). Briefly describe the information that will be displayed on those pages and the forms that will be rendered (i.e., explain the input and output for each page). Make sure to mention which use-cases in your “Requirements Specification” document will utilize these interfaces for user interaction. You can supplement your description with UI sketches or screenshots. 
+
+***Templates:***
+  1. base.html
+    - This is the base for all of the templates to be extended off of. 
+    - This displays the header with buttons (login, logout, add book, and home) and the current user.  
+  2. index.html
+    - This creates the home page, which uses the _book.html to display all of the books in the library.
+  3. login.html
+    - This uses the login form to let users with existing accounts log in, and users without accounts can register using the register button below the login form.
+  4. register.html
+    - This uses the registration form to let anyone create an account.
+  5. admin_registration.html
+    - This uses the admin registration form to let an admin create an account.
+  6. _book.html
+    - This lists all the books on the page, giving the option for the user to create a review for a specific book or to look at the reviews of a specific book. When selected those links you get redirected to the _review.html(to look at existing reviews) or create.html(to create a new review).
+  7. _review.html
+    - This lists all the reviews of a specific selected book for user to read, and where a logged in user can choose to like a review.
+  8. create.html
+    - This lets a logged in user create a review for the specific book using the review form. 
+    - If user is not logged in, page will redirect back to the previous page with a flash message telling user to create an account or login to create a review. 
+  9. add_book.html
+    - This lets an admin add a new book to the library using the book form.
+  10. 404error.html
+  11. 500error.html
+  12. user profile page (not implemented yet)
+    - This page will show all the user information, and allow user to edit any of the information.
+  13. user friends (not implemented yet)
+    - This page will display current friends and an option to search and add new friends.
+  14. user reviews (not implemented yet)
+    - This page will display all of the users reviews and give the option to edit a review or delete a review.
+
+![](pageView.jpg)
+
+![](homePage.png)
+![](signinPage.png)
+![](registerPage.png)
+![](reviewPage.png)
+![](createReviewPage.png)
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
@@ -222,6 +282,9 @@ Provide a list of the page templates you plan to create (or you already created)
 # 3. Progress Report
 
 Write a short paragraph summarizing your progress in iteration1 / iteration2.
+
+***in iteration 1**
+In iteration 1 BookWorms have implemented the bare bones of the Book App. This includes the functions: to add books or add a review to specific books; register as an admin or register as a regular user; log in and out; and liking reviews. We started to create a coherent theme for the view, but that is still in progress, along with making the admin exclusive actions only available to admins. Upcoming problems to tackle are adding genres to movies and the action top sort books and reviews.
 
 # 4. Testing Plan
 
@@ -242,30 +305,3 @@ For the papers you cite give the authors, the title of the article, the journal 
 
 For the websites, give the title, author (if applicable) and the website URL.
 
-
-----
-# Appendix: Grading Rubric
-(Please remove this part in your final submission)
-
-These is the grading rubric that we will use to evaluate your document. 
-
-
-|**MaxPoints**| **Design** |
-|:---------:|:-------------------------------------------------------------------------|
-|           | Are all parts of the document in agreement with the product requirements? |
-| 10        | Is the architecture of the system described well, with the major components and their interfaces?  Is the rationale for the proposed decomposition in terms of cohesion and coupling explained well? |
-| 15        | Is the document making good use of semi-formal notation (i.e., UML diagrams)? Does the document provide a clear and complete UML component diagram illustrating the architecture of the system? |
-| 15        | Is the model (i.e., “database model”) explained well with sufficient detail? | 
-| 10        | Is the controller explained in sufficient detail?  |
-| 22        | Are all major interfaces (i.e., the routes) listed? Are the routes explained in sufficient detail? |
-| 10        | Is the view and the user interfaces explained well? Did the team provide the screenshots of the interfaces they built so far.   |
-| 5         | Is there sufficient detail in the design to start Iteration 2?   |
-| 5         | Progress report  |
-|           |   |
-|           | **Clarity** |
-|           | Is the solution at a fairly consistent and appropriate level of detail? Is the solution clear enough to be turned over to an independent group for implementation and still be understood? |
-| 5         | Is the document carefully written, without typos and grammatical errors?  |
-| 3         | Is the document well formatted? (Make sure to check your document on GitHub. You will loose points if there are formatting issues in your document.  )  |
-|           |  |
-|           | **Total** |
-|           |  |
