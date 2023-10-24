@@ -58,15 +58,33 @@ At the end of the introduction, provide an overview of the document outline.
 # 2.	Architectural and Component-level Design
 ## 2.1 System Structure
 
+In this section:
+ * Provide a UML component diagram that illustrates the architecture of your software.
+
 ![UML_Diagram2](https://github.com/WSU-CptS-322-Fall-2023/termproject-bookworms/assets/122507199/5a36261c-095b-422d-a911-d97bc96a20aa)
+
+* Briefly mention the role of each subsystem in your architectural design.
+  
+1. Routes
+   Role:
+   - Create new forms and redirects and displays html pages.
+  
+2. Authorization Routes
+   Role:
+   - Create new authorization forms for admin and regular users and redirects and displays login and register html pages.
+
+3. Forms
+   Role:
+   - Creates forms for new books and new reviews.
+  
+3. Authorization Forms
+   Role:
+   - Creates forms for registration and login for users.
+   
+* Discuss the rationale for the proposed decomposition in terms of  coupling and re-use.
 
 This section should describe the high-level architecture of your software:  i.e., the major subsystems and how they fit together. 
 If you adopted the application structure we used in the Smile App, your application would have the Model-View-Controller (MVC) pattern. If you adopted a different architectural pattern, mention the pattern you adopted in your software and briefly discuss the rationale for using the proposed architecture (i.e., why that pattern fits well for your system).
-
-In this section:
- * Provide a UML component diagram that illustrates the architecture of your software.
- * Briefly mention the role of each subsystem in your architectural design. 
- * Discuss the rationale for the proposed decomposition in terms of  coupling and re-use.
 
 ## 2.2 Subsystem Design 
 
