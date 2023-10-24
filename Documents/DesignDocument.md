@@ -218,7 +218,7 @@ The view of Book App will be used to give users easy access to all the features 
 
 Provide a list of the page templates you plan to create (or you already created). Briefly describe the information that will be displayed on those pages and the forms that will be rendered (i.e., explain the input and output for each page). Make sure to mention which use-cases in your “Requirements Specification” document will utilize these interfaces for user interaction. You can supplement your description with UI sketches or screenshots. 
 
-***Current Templates:***
+***Templates:***
   1. base.html
     - This is the base for all of the templates to be extended off of. 
     - This displays the header with buttons (login, logout, add book, and home) and the current user.  
@@ -241,13 +241,11 @@ Provide a list of the page templates you plan to create (or you already created)
     - This lets an admin add a new book to the library using the book form.
   10. 404error.html
   11. 500error.html
-
-***Future Templates:***
-  12. user profile page
+  12. user profile page (not implemented yet)
     - This page will show all the user information, and allow user to edit any of the information.
-  13. user friends
+  13. user friends (not implemented yet)
     - This page will display current friends and an option to search and add new friends.
-  14. user reviews
+  14. user reviews (not implemented yet)
     - This page will display all of the users reviews and give the option to edit a review or delete a review.
 
 ![](pageView.jpeg)
