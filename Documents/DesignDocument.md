@@ -45,9 +45,9 @@ Prepared by:
 
 # 1. Introduction
 
-Explain the purpose for providing this design document. If this is a revision of an earlier document, please make sure to summarize what changes have been made during the revision (keep this discussion brief). 
+This design document will show the blueprint for the Book App.
 
-Then provide a brief description of your project and state your project goal.
+This project is the Book App, an app where users can read and write reviews for their favorite books.
 
 At the end of the introduction, provide an overview of the document outline.
 
