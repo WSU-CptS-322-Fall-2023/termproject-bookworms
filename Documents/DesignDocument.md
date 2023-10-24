@@ -268,11 +268,11 @@ Provide a list of the page templates you plan to create (or you already created)
 
 ![](pageView.jpg)
 
-![\screenshots](homePage.png)
-![\screenshots](signinPage.png)
-![\screenshots](registerPage.png)
-![\screenshots](reviewPage.png)
-![\screenshots](createReviewPage.png)
+![](homePage.png)
+![](signinPage.png)
+![](registerPage.png)
+![](reviewPage.png)
+![](createReviewPage.png)
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
