@@ -250,6 +250,12 @@ Provide a list of the page templates you plan to create (or you already created)
 
 ![](pageView.jpg)
 
+![\screenshots](homePage.png)
+![\screenshots](signinPage.png)
+![\screenshots](registerPage.png)
+![\screenshots](reviewPage.png)
+![\screenshots](createReviewPage.png)
+
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
 (***in iteration-2***) Revise your page list and descriptions and include any additional pages that you will include in your view.  In iteration-2, you will be deducted points if your view description is still superficial and doesn't list and explain all pages of your application. 
