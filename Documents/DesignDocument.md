@@ -214,7 +214,43 @@ logout Route:
 
 Briefly explain the role of the view. Explain how you plan to build the user interfaces and mention the frameworks/libraries you plan to use (e.g., Bootstrap).  
 
+The view of Book App will be used to give users easy access to all the features of the Book App. We right now are just using the HTML frameworks, but soon will use Bootstrap to create a clean UI.
+
 Provide a list of the page templates you plan to create (or you already created). Briefly describe the information that will be displayed on those pages and the forms that will be rendered (i.e., explain the input and output for each page). Make sure to mention which use-cases in your “Requirements Specification” document will utilize these interfaces for user interaction. You can supplement your description with UI sketches or screenshots. 
+
+***Current Templates:***
+  1. base.html
+    - This is the base for all of the templates to be extended off of. 
+    - This displays the header with buttons (login, logout, add book, and home) and the current user.  
+  2. index.html
+    - This creates the home page, which uses the _book.html to display all of the books in the library.
+  3. login.html
+    - This uses the login form to let users with existing accounts log in, and users without accounts can register using the register button below the login form.
+  4. register.html
+    - This uses the registration form to let anyone create an account.
+  5. admin_registration.html
+    - This uses the admin registration form to let an admin create an account.
+  6. _book.html
+    - This lists all the books on the page, giving the option for the user to create a review for a specific book or to look at the reviews of a specific book. When selected those links you get redirected to the _review.html(to look at existing reviews) or create.html(to create a new review).
+  7. _review.html
+    - This lists all the reviews of a specific selected book for user to read, and where a logged in user can choose to like a review.
+  8. create.html
+    - This lets a logged in user create a review for the specific book using the review form. 
+    - If user is not logged in, page will redirect back to the previous page with a flash message telling user to create an account or login to create a review. 
+  9. add_book.html
+    - This lets an admin add a new book to the library using the book form.
+  10. 404error.html
+  11. 500error.html
+
+***Future Templates:***
+  12. user profile page
+    - This page will show all the user information, and allow user to edit any of the information.
+  13. user friends
+    - This page will display current friends and an option to search and add new friends.
+  14. user reviews
+    - This page will display all of the users reviews and give the option to edit a review or delete a review.
+
+![](pageView.jpeg)
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
@@ -224,6 +260,9 @@ Provide a list of the page templates you plan to create (or you already created)
 # 3. Progress Report
 
 Write a short paragraph summarizing your progress in iteration1 / iteration2.
+
+***in iteration 1**
+In iteration 1 BookWorms have implemented the bare bones of the Book App. This includes the functions: to add books or add a review to specific books; register as an admin or register as a regular user; log in and out; and liking reviews. We started to create a coherent theme for the view, but that is still in progress, along with making the admin exclusive actions only available to admins. Upcoming problems to tackle are adding genres to movies and the action top sort books and reviews.
 
 # 4. Testing Plan
 
