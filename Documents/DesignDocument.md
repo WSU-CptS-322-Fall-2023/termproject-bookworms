@@ -58,6 +58,8 @@ At the end of the introduction, provide an overview of the document outline.
 # 2.	Architectural and Component-level Design
 ## 2.1 System Structure
 
+![UML_Diagram2](https://github.com/WSU-CptS-322-Fall-2023/termproject-bookworms/assets/122507199/5a36261c-095b-422d-a911-d97bc96a20aa)
+
 This section should describe the high-level architecture of your software:  i.e., the major subsystems and how they fit together. 
 If you adopted the application structure we used in the Smile App, your application would have the Model-View-Controller (MVC) pattern. If you adopted a different architectural pattern, mention the pattern you adopted in your software and briefly discuss the rationale for using the proposed architecture (i.e., why that pattern fits well for your system).
 
