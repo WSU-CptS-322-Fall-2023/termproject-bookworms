@@ -305,30 +305,3 @@ For the papers you cite give the authors, the title of the article, the journal 
 
 For the websites, give the title, author (if applicable) and the website URL.
 
-
-----
-# Appendix: Grading Rubric
-(Please remove this part in your final submission)
-
-These is the grading rubric that we will use to evaluate your document. 
-
-
-|**MaxPoints**| **Design** |
-|:---------:|:-------------------------------------------------------------------------|
-|           | Are all parts of the document in agreement with the product requirements? |
-| 10        | Is the architecture of the system described well, with the major components and their interfaces?  Is the rationale for the proposed decomposition in terms of cohesion and coupling explained well? |
-| 15        | Is the document making good use of semi-formal notation (i.e., UML diagrams)? Does the document provide a clear and complete UML component diagram illustrating the architecture of the system? |
-| 15        | Is the model (i.e., “database model”) explained well with sufficient detail? | 
-| 10        | Is the controller explained in sufficient detail?  |
-| 22        | Are all major interfaces (i.e., the routes) listed? Are the routes explained in sufficient detail? |
-| 10        | Is the view and the user interfaces explained well? Did the team provide the screenshots of the interfaces they built so far.   |
-| 5         | Is there sufficient detail in the design to start Iteration 2?   |
-| 5         | Progress report  |
-|           |   |
-|           | **Clarity** |
-|           | Is the solution at a fairly consistent and appropriate level of detail? Is the solution clear enough to be turned over to an independent group for implementation and still be understood? |
-| 5         | Is the document carefully written, without typos and grammatical errors?  |
-| 3         | Is the document well formatted? (Make sure to check your document on GitHub. You will loose points if there are formatting issues in your document.  )  |
-|           |  |
-|           | **Total** |
-|           |  |
