@@ -248,7 +248,7 @@ Provide a list of the page templates you plan to create (or you already created)
   14. user reviews (not implemented yet)
     - This page will display all of the users reviews and give the option to edit a review or delete a review.
 
-![](pageView.jpeg)
+![](pageView.jpg)
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
