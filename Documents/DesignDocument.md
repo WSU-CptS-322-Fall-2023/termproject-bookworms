@@ -148,53 +148,53 @@ You can use the following table template to list your route specifications.
 routes subsystem:
   - This subsystem primarily deals with routes related to the main functionality of the application, including managing books, reviews, and user interactions.
 
-  index Route:
-    URL Path: / and /index
-    Method: GET
-    Description: Renders the main index page of the application, displaying books and allowing users to interact with them. It fetches a list of books and passes them to the template.
+  - index Route:
+    - URL Path: / and /index 
+    - Method: GET 
+    - Description: Renders the main index page of the application, displaying books and allowing users to interact with them. It fetches a list of - books and passes them to the template.
 
-  postReview Route:
-    URL Path: /postreview<book_id>
-    Methods: GET and POST
-    Description: Handles the creation of reviews for a specific book. It takes a book ID as a parameter, retrieves the book, and allows users to submit reviews for that book.
+  - postReview Route:
+    - URL Path: /postreview<book_id>
+    - Methods: GET and POST
+    - Description: Handles the creation of reviews for a specific book. It takes a book ID as a parameter, retrieves the book, and allows users to - submit reviews for that book.
 
-  addbook Route:
-    URL Path: /addbook
-    Methods: GET and POST
-    Description: Allows users to add new books to the system. It handles the form submission and book creation, displaying a form for entering book details.
+  - addbook Route:
+    - URL Path: /addbook
+    - Methods: GET and POST
+    - Description: Allows users to add new books to the system. It handles the form submission and book creation, displaying a form for entering book details.
 
-  reviews Route:
-    URL Path: /reviews<book_id>
-    Method: GET
-    Description: Displays reviews for a specific book. Users can see the reviews associated with a book.
+  - reviews Route:
+    - URL Path: /reviews<book_id>
+    - Method: GET
+    - Description: Displays reviews for a specific book. Users can see the reviews associated with a book.
 
-  like Route:
-    URL Path: /like/<review_id> <book_id>
-    Method: POST
-    Description: Handles the process of liking a review. It increments the like count for a review and redirects back to the reviews page for the associated book.
+  - like Route:
+    - URL Path: /like/<review_id> <book_id> 
+    - Method: POST 
+    - Description: Handles the process of liking a review. It increments the like count for a review and redirects back to the reviews page for the associated book.
 
 bp_auth Subsystem:
   - This subsystem is responsible for user authentication and registration.
 
-admin_registration Route:
-  URL Path: /admin_registration
-  Methods: GET and POST
-  Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
-  regular_registration Route:
+  - admin_registration Route:
+    - URL Path: /admin_registration
+    - Methods: GET and POST
+    - Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
 
-URL Path: /regular_registration
-  Methods: GET and POST
-  Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
+  - regular_registration Route:
+    - URL Path: /regular_registration
+    - Methods: GET and POST
+    - Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
 
-login Route:
-  URL Path: /login
-  Methods: GET and POST
-  Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
+  - login Route:
+    - URL Path: /login
+    - Methods: GET and POST
+    - Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
 
-logout Route:
-  URL Path: /logout
-  Methods: GET and POST
-  Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
+  - logout Route:
+    - URL Path: /logout
+    - Methods: GET and POST
+    - Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
 
 (***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
 
