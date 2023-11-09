@@ -310,12 +310,12 @@ Provide a list of the page templates you plan to create (or you already created)
 Write a short paragraph summarizing your progress in iteration1 / iteration2.
 
 ***in iteration 1**
-In iteration 1 BookWorms have implemented the bare bones of the Book App. This includes the functions: to add books or add a review to specific books; register as an admin or register as a regular user; log in and out; and liking reviews. We started to create a coherent theme for the view, but that is still in progress, along with making the admin exclusive actions only available to admins. Upcoming problems to tackle are adding genres to movies and the action top sort books and reviews.
+In iteration 1 BookWorms have implemented the bare bones of the Book App. This includes the functions: to add books or add a review to specific books; register as an admin or register as a regular user; log in and out; and liking reviews. We started to create a coherent theme for the view, but that is still in progress, along with making the admin exclusive actions only available to admins. Upcoming problems to tackle are adding genres to books and the action top sort books and reviews.
+
+***in iteration 2**
+In iteration 2 Bookworms have implemented the following: preventions for non-users posting and adding books and regular users adding books; regular users can delete their previous posts and admins and delete any post; added a genres to book relationship, this is for users to have other books recommended to them potentially; added a display profile page for when a user or admin logs in. Theme for the view is still in progress, this is part of the upcoming agenda to polish off the UI, along with search, recommended genres, and testing.
 
 # 4. Testing Plan
-
-(***in iteration 1***)
-Don't include this section.
 
 (***in iteration 2***)
 In this section , provide a brief description of how you plan to test the system. Thought should be given to  mostly how automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. Consider the following kinds of testing:
