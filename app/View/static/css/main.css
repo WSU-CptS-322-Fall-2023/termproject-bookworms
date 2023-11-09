@@ -170,6 +170,15 @@ a:hover {
     margin: 5px 5px 5px 5px;
 }
 
+.genreitem{
+    text-align: center;
+    font-size: small;
+    margin: 2px 2px;
+    padding: 3px;
+    border: 1px solid black;
+    background-color: rgb(164, 250, 177);
+
+}
 @media screen and (min-width: 800px) and (max-width:1200px){
     .postbox{
         display: flex; 

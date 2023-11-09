@@ -60,8 +60,6 @@ class Regular_User(User):
     __mapper_args__ = {
         'polymorphic_identity': 'Reg_User'
     }
-
-
     
 
 class Book(db.Model):     ##### not sure if the relationship is how this works? #####
@@ -69,6 +67,7 @@ class Book(db.Model):     ##### not sure if the relationship is how this works? 
     title = db.Column(db.String(150))
     author = db.Column(db.String(30))
     year = db.Column(db.Integer, db.ForeignKey('year.year'))
+    genres = db.relationship('Roster', back_populates="bookgenres")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     reviews = db.relationship('Review', secondary = reviewBook, primaryjoin=(reviewBook.c.book_id == id), 
@@ -78,6 +77,14 @@ class Book(db.Model):     ##### not sure if the relationship is how this works? 
 
     def getTitle(self):
         return self.title
+    
+    def getGenres(self):
+        return self.genres
+    
+    def addGenre(self, newGenre):
+        newG = Roster(genres = newGenre)
+        self.genres.append(newG)
+        db.session.commit()
 
     # reviews = db.relationship('Review', back_populates="book")
 
@@ -86,3 +93,17 @@ class Year(db.Model):
     year = db.Column(db.Integer)
     books = db.relationship('Book', backref='bookyear', lazy='dynamic')
 
+class Genre(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    roster = db.relationship('Roster', back_populates="genres")
+
+    def __repr__(self):
+        return '{}'.format(self.name)
+
+
+class Roster(db.Model):
+    bookid = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
+    genreid = db.Column(db.Integer, db.ForeignKey('genre.id'), primary_key=True)
+    bookgenres = db.relationship('Book')
+    genres = db.relationship('Genre')

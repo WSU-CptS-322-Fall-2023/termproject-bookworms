@@ -6,7 +6,7 @@ from flask_login import current_user
 from config import Config
 
 from app import db
-from app.Model.models import Review, Book
+from app.Model.models import Review, Book, Genre, Roster
 from app.Controller.forms import ReviewForm, BookForm, get_book
 
 bp_routes = Blueprint('routes', __name__)
@@ -45,6 +45,8 @@ def addbook():
     bform = BookForm()
     if bform.validate_on_submit():
         newBook = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year)
+        for t in bform.genre.data:
+            newBook.addGenre(t)
         db.session.add(newBook)
         db.session.commit()
 
@@ -72,3 +74,14 @@ def like(review_id, book_id):
 
     return redirect(url_for('routes.reviews', book_id=book_id))
 
+@bp_routes.route('/roster/<genre_id>', methods=['GET'])
+# @login_required
+def roster(genre_id):
+    theGenre = Genre.query.filter_by(id = genre_id).first()
+    if theGenre:
+        theBooks = Book.query.join(Roster).filter_by(genreid = genre_id).all()
+
+        return render_template('roster.html', title= 'Roster', books = theBooks, genre = theGenre)
+    else:
+        flash('Genre with id:"' + genre_id + '"not found!')
+        return redirect(url_for('routes.index'))

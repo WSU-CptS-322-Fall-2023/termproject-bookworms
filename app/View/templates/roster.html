@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> {{ genre }} books </h1>
+
+    {% for book in books %}
+        <div class="postbox">
+            {% include '_book.html' %}
+        </div>
+    {% endfor %}
+    <br>
+    <!-- <a href="{{url_for('routes.index')}}" class = "button"> Return to main page </a> -->
+
+{% endblock %}

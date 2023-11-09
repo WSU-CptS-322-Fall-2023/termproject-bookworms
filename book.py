@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.Model.models import Review, User, Book, Year
+from app.Model.models import Review, User, Book, Year, Genre
 
 app = create_app()
 
@@ -18,11 +18,18 @@ def initDB(*args, **kwargs):
                     ]
             for t in books:
                 db.session.add(Book(title=t['title'],author=t['author']))
+                db.session.commit()
                 
         if Year.query.count() == 0:
             for i in range(2023, 1949, -1):
                 db.session.add(Year(year=i))
 
+            db.session.commit()
+
+        if Genre.query.count() == 0:
+            genres = ['Fiction','Non-Fiction', 'Mystery', 'Romance', 'Fantasy']
+            for g in genres:
+                db.session.add(Genre(name=g))
             db.session.commit()
 
 if __name__ == "__main__":
