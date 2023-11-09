@@ -285,12 +285,11 @@ Provide a list of the page templates you plan to create (or you already created)
 
 ![](pageView.jpg)
 
-<img src="homePage.png" alt="image" width="300" height="auto">
-![](homePage.png)
-![](signinPage.png)
-![](registerPage.png)
-![](reviewPage.png)
-![](createReviewPage.png)
+<img src="homePage.png" alt="image" width="350" height="auto">
+<img src="signinPage.png" alt="image" width="350" height="auto">
+<img src="registerPage.png" alt="image" width="350" height="auto">
+<img src="reviewPage.png" alt="image" width="350" height="auto">
+<img src="createReviewPage.png" alt="image" width="350" height="auto">
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
