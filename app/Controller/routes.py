@@ -7,7 +7,7 @@ from config import Config
 
 from app import db
 from app.Model.models import Review, Book, Genre, Roster
-from app.Controller.forms import ReviewForm, BookForm, get_book
+from app.Controller.forms import ReviewForm, BookForm, get_book, EmptyForm, EditForm
 
 bp_routes = Blueprint('routes', __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
@@ -24,6 +24,9 @@ def index():
 
 @bp_routes.route('/postreview<book_id>', methods=['GET', 'POST'] )
 def postReview(book_id):
+    if current_user.is_anonymous:
+        return redirect(url_for('routes.index'))
+
     book = Book.query.filter_by(id = book_id).first()
 
     rform = ReviewForm()
@@ -42,6 +45,8 @@ def postReview(book_id):
 @bp_routes.route('/addbook', methods=['GET', 'POST'])
 #@login_required
 def addbook():
+    if current_user.is_anonymous or current_user.user_type != "Admin":
+        return redirect(url_for('routes.index'))
     bform = BookForm()
     if bform.validate_on_submit():
         newBook = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year)
@@ -85,3 +90,30 @@ def roster(genre_id):
     else:
         flash('Genre with id:"' + genre_id + '"not found!')
         return redirect(url_for('routes.index'))
+    
+
+@bp_routes.route('/display_profile', methods=['GET'])
+# @login_required
+def display_profile():
+    emptyform = EmptyForm()
+    return render_template('display_profile.html', title='Display Profile', user = current_user, eform = emptyform)
+
+@bp_routes.route('/edit_profile', methods=['GET', 'POST'])
+#@login_required
+def edit_profile():
+    eform = EditForm()
+    if request.method == 'POST' :
+        # handle form submission
+        if eform.validate_on_submit():
+            current_user.email = eform.email.data
+            current_user.set_password(eform.password.data)
+            db.session.add(current_user)
+            db.session.commit()
+            flash("Your changes have been saved")
+            return redirect(url_for('routes.display_profile'))
+    elif request.method == 'GET':
+        # populate user data
+        eform.email.data = current_user.email
+    else:
+        pass
+    return render_template('edit_profile.html', title='Edit Profile', form = eform)
