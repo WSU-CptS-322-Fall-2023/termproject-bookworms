@@ -58,12 +58,7 @@ At the end of the introduction, provide an overview of the document outline.
 # 2.	Architectural and Component-level Design
 ## 2.1 System Structure
 
-In this section:
- * Provide a UML component diagram that illustrates the architecture of your software.
-
 ![UML_Diagram2](https://github.com/WSU-CptS-322-Fall-2023/termproject-bookworms/assets/122507199/5a36261c-095b-422d-a911-d97bc96a20aa)
-
-* Briefly mention the role of each subsystem in your architectural design.
   
 1. Routes
    Role:
@@ -88,15 +83,13 @@ If you adopted the application structure we used in the Smile App, your applicat
 
 ## 2.2 Subsystem Design 
 
-(**Note1**: This is just a suggested template. If you adopted a pattern other than MVC, you should revise this template and the list the major subsystems in your architectural design.)
+
 
 (**Note2**: You should describe the design for the end product (completed application) - not only your iteration1 version. You will revise this document in iteration-2 and make changes  and/or add more details in iteration-2.)
 
 ### 2.2.1 Model
 
 Briefly explain the role of the model. 
-
-(***in iteration-1***) Include a list of the tables (models) in your database and explain the role of each table. Provide the attributes of the tables (including relationships). 
 
 1. Review
   Role:
@@ -119,7 +112,29 @@ Briefly explain the role of the model.
     - Relationship:
       - review: A relationship with the Review table will be added, not defined yet.
 
-3. Book
+3. Regular_User
+  Role:
+  - Represents a regular user accounts in the application.
+  Attributes: (inherited from User) 
+    - id (Primary Key): An integer representing the unique identifier for each user.
+    - username: A string (up to 64 characters) for the user's username.
+    - email: A string (up to 120 characters) for the user's email address.
+    - password_hash: A string (128 characters) for storing the hashed password.
+    - Relationship:
+      - review: A relationship with the Review table will be added, not defined yet.
+
+4. Admin
+  Role:
+  - Represents an admin account in the application.
+  Attributes: (inherited from User) 
+    - id (Primary Key): An integer representing the unique identifier for each user.
+    - username: A string (up to 64 characters) for the user's username.
+    - email: A string (up to 120 characters) for the user's email address.
+    - password_hash: A string (128 characters) for storing the hashed password.
+    - Relationship:
+      - review: A relationship with the Review table will be added, not defined yet.
+
+5. Book
   Role:
   - Represents books and their details.
   Attributes:
@@ -128,11 +143,12 @@ Briefly explain the role of the model.
     - author: A string (up to 30 characters) for the book's author.
     - year: An integer representing the year of the book (foreign key to the Year table).
     - timestamp: A DateTime field that stores the book's creation timestamp.
+    - genres: An array of genres from the genre table.
     - Relationships:
       - reviews: A many-to-many relationship with the Review table, defined through the reviewBook association table.
       - genres. A many-to-many relationship with the Genre table, defined through an association table.
 
-4. Year
+6. Year
   Role:
   - Represents years in which books were published.
   Attributes:
@@ -141,14 +157,26 @@ Briefly explain the role of the model.
     - Relationships:
     - books: A one-to-many relationship with the Book table, allowing multiple books to be associated with a specific year.
 
-5. Genre (not defined yet)
+7. Genre
   Role: 
     - Represent book genres.
   Attributes:
       - id (Primary Key): An integer representing a book genre.
       - name: A string representing the name of the genre.
+      - roster: A roster of all the genres ro a book
+      - Relationships:
+        - genres. A many-to-many relationship with the Genre table, defined through an association table.
 
-(***in iteration -2***) Revise the database model. Provide a UML diagram of your database model showing the associations and relationships among tables. Your UML diagram should also show the methods of your models.
+8. Roster
+  Role:
+    - Association table for genres to books.
+  Attributes:
+    - bookid (Primary Key): An integer representing a book id.
+    - genreid (Primary Key): An integer representing a genre id.
+    - bookgenres: A relationship with Book.
+    - genres: A relationship with Genre.
+
+![](BookAppUML.png)
 
 ### 2.2.2 Controller
 
@@ -168,53 +196,53 @@ You can use the following table template to list your route specifications.
 routes subsystem:
   - This subsystem primarily deals with routes related to the main functionality of the application, including managing books, reviews, and user interactions.
 
-  - index Route:
-    - URL Path: / and /index 
-    - Method: GET 
-    - Description: Renders the main index page of the application, displaying books and allowing users to interact with them. It fetches a list of - books and passes them to the template.
+  index Route:
+    URL Path: / and /index
+    Method: GET
+    Description: Renders the main index page of the application, displaying books and allowing users to interact with them. It fetches a list of books and passes them to the template.
 
-  - postReview Route:
-    - URL Path: /postreview<book_id>
-    - Methods: GET and POST
-    - Description: Handles the creation of reviews for a specific book. It takes a book ID as a parameter, retrieves the book, and allows users to - submit reviews for that book.
+  postReview Route:
+    URL Path: /postreview<book_id>
+    Methods: GET and POST
+    Description: Handles the creation of reviews for a specific book. It takes a book ID as a parameter, retrieves the book, and allows users to submit reviews for that book.
 
-  - addbook Route:
-    - URL Path: /addbook
-    - Methods: GET and POST
-    - Description: Allows users to add new books to the system. It handles the form submission and book creation, displaying a form for entering book details.
+  addbook Route:
+    URL Path: /addbook
+    Methods: GET and POST
+    Description: Allows users to add new books to the system. It handles the form submission and book creation, displaying a form for entering book details.
 
-  - reviews Route:
-    - URL Path: /reviews<book_id>
-    - Method: GET
-    - Description: Displays reviews for a specific book. Users can see the reviews associated with a book.
+  reviews Route:
+    URL Path: /reviews<book_id>
+    Method: GET
+    Description: Displays reviews for a specific book. Users can see the reviews associated with a book.
 
-  - like Route:
-    - URL Path: /like/<review_id> <book_id> 
-    - Method: POST 
-    - Description: Handles the process of liking a review. It increments the like count for a review and redirects back to the reviews page for the associated book.
+  like Route:
+    URL Path: /like/<review_id> <book_id>
+    Method: POST
+    Description: Handles the process of liking a review. It increments the like count for a review and redirects back to the reviews page for the associated book.
 
 bp_auth Subsystem:
   - This subsystem is responsible for user authentication and registration.
 
-  - admin_registration Route:
-    - URL Path: /admin_registration
-    - Methods: GET and POST
-    - Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
+admin_registration Route:
+  URL Path: /admin_registration
+  Methods: GET and POST
+  Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
+  regular_registration Route:
 
-  - regular_registration Route:
-    - URL Path: /regular_registration
-    - Methods: GET and POST
-    - Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
+URL Path: /regular_registration
+  Methods: GET and POST
+  Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
 
-  - login Route:
-    - URL Path: /login
-    - Methods: GET and POST
-    - Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
+login Route:
+  URL Path: /login
+  Methods: GET and POST
+  Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
 
-  - logout Route:
-    - URL Path: /logout
-    - Methods: GET and POST
-    - Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
+logout Route:
+  URL Path: /logout
+  Methods: GET and POST
+  Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
 
 (***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
 
@@ -229,8 +257,6 @@ bp_auth Subsystem:
 
 
 ### 2.2.3 View and User Interface Design 
-
-Briefly explain the role of the view. Explain how you plan to build the user interfaces and mention the frameworks/libraries you plan to use (e.g., Bootstrap).  
 
 The view of Book App will be used to give users easy access to all the features of the Book App. We right now are just using the HTML frameworks, but soon will use Bootstrap to create a clean UI.
 
