@@ -74,19 +74,10 @@ At the end of the introduction, provide an overview of the document outline.
 3. Authorization Forms
    Role:
    - Creates forms for registration and login for users.
-   
-* Discuss the rationale for the proposed decomposition in terms of  coupling and re-use.
-
-This section should describe the high-level architecture of your software:  i.e., the major subsystems and how they fit together. 
-If you adopted the application structure we used in the Smile App, your application would have the Model-View-Controller (MVC) pattern. If you adopted a different architectural pattern, mention the pattern you adopted in your software and briefly discuss the rationale for using the proposed architecture (i.e., why that pattern fits well for your system).
 
 ## 2.2 Subsystem Design 
 
-(**Note2**: You should describe the design for the end product (completed application) - not only your iteration1 version. You will revise this document in iteration-2 and make changes  and/or add more details in iteration-2.)
-
 ### 2.2.1 Model
-
-Briefly explain the role of the model. 
 
 1. Review
   Role:
@@ -177,19 +168,6 @@ Briefly explain the role of the model.
 
 ### 2.2.2 Controller
 
-Briefly explain the role of the controller. If your controller is decomposed into smaller subsystems (similar to the Smile App design we discussed in class), list each of those subsystems as subsections. 
-
-For each subsystem:
- * Explain the role of the subsystem (component) and its responsibilities.
- * 	Provide a detailed description of the subsystem interface, i.e., 
-    * which other subsystems does it interact with?  
-    * what are the interdependencies between them? 
-
-**Note:** Some of your subsystems will interact with the Web clients (browsers). Make sure to include a detailed description of the routes your application will implement. For each route specify its “methods”, “URL path”, and “a description of the operation it implements”.  
-You can use the following table template to list your route specifications. 
-
-(***in iteration-1***) Brainstorm with your team members and identify all routes you need to implement for the completed application and explain each route briefly. If you included most of the major routes but you missed only a few, it maybe still acceptable. 
-
 routes subsystem:
   - This subsystem primarily deals with routes related to the main functionality of the application, including managing books, reviews, and user interactions.
 
@@ -256,13 +234,9 @@ bp_auth Subsystem:
     Methods: GET and POST
     Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
 
-(***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
-
 ### 2.2.3 View and User Interface Design 
 
 The view of Book App will be used to give users easy access to all the features of the Book App. We right now are just using the HTML frameworks, but soon will use Bootstrap to create a clean UI.
-
-Provide a list of the page templates you plan to create (or you already created). Briefly describe the information that will be displayed on those pages and the forms that will be rendered (i.e., explain the input and output for each page). Make sure to mention which use-cases in your “Requirements Specification” document will utilize these interfaces for user interaction. You can supplement your description with UI sketches or screenshots. 
 
 ***Templates:***
   1. base.html
@@ -302,20 +276,13 @@ Provide a list of the page templates you plan to create (or you already created)
 <img src="reviewPage.png" alt="image" width="350" height="auto">
 <img src="createReviewPage.png" alt="image" width="350" height="auto">
 
-(***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
-
-(***in iteration-2***) Revise your page list and descriptions and include any additional pages that you will include in your view.  In iteration-2, you will be deducted points if your view description is still superficial and doesn't list and explain all pages of your application. 
-
-
 # 3. Progress Report
-
-Write a short paragraph summarizing your progress in iteration1 / iteration2.
 
 ***in iteration 1**
 In iteration 1 BookWorms have implemented the bare bones of the Book App. This includes the functions: to add books or add a review to specific books; register as an admin or register as a regular user; log in and out; and liking reviews. We started to create a coherent theme for the view, but that is still in progress, along with making the admin exclusive actions only available to admins. Upcoming problems to tackle are adding genres to books and the action top sort books and reviews.
 
 ***in iteration 2**
-In iteration 2 Bookworms have implemented the following: preventions for non-users posting and adding books and regular users adding books; regular users can delete their previous posts and admins and delete any post; added a genres to book relationship, this is for users to have other books recommended to them potentially; added a display profile page for when a user or admin logs in. Theme for the view is still in progress, this is part of the upcoming agenda to polish off the UI, along with search, recommended genres, and testing.
+In iteration 2 Bookworms have implemented the following: preventions for non-users posting and adding books and regular users adding books; regular users can delete their previous posts and admins and delete any post; added a genres to book relationship, this is for users to have other books recommended to them potentially, for now each tag for the book can be selected to see other books in that genre; and added a display profile page for when a user or admin logs in. The theme for the view is still in progress, this is part of the upcoming agenda to polish off the UI, along with search, recommended genres, and testing.
 
 # 4. Testing Plan
 
