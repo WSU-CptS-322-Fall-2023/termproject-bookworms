@@ -224,37 +224,27 @@ routes subsystem:
 bp_auth Subsystem:
   - This subsystem is responsible for user authentication and registration.
 
-admin_registration Route:
-  URL Path: /admin_registration
-  Methods: GET and POST
-  Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
-  regular_registration Route:
+  admin_registration Route:
+    URL Path: /admin_registration
+    Methods: GET and POST
+    Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
+    regular_registration Route:
 
-URL Path: /regular_registration
-  Methods: GET and POST
-  Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
+  URL Path: /regular_registration
+    Methods: GET and POST
+    Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
 
-login Route:
-  URL Path: /login
-  Methods: GET and POST
-  Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
+  login Route:
+    URL Path: /login
+    Methods: GET and POST
+    Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
 
-logout Route:
-  URL Path: /logout
-  Methods: GET and POST
-  Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
+  logout Route:
+    URL Path: /logout
+    Methods: GET and POST
+    Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
 
 (***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
-
-|   | Methods           | URL Path   | Description  |
-|:--|:------------------|:-----------|:-------------|
-|1. |                   |            |              |
-|2. |                   |            |              |
-|3. |                   |            |              |
-|4. |                   |            |              |
-|5. |                   |            |              |
-|6. |                   |            |              |
-
 
 ### 2.2.3 View and User Interface Design 
 
@@ -295,6 +285,7 @@ Provide a list of the page templates you plan to create (or you already created)
 
 ![](pageView.jpg)
 
+<img src="homePage.png" alt="image" width="300" height="auto">
 ![](homePage.png)
 ![](signinPage.png)
 ![](registerPage.png)
