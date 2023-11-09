@@ -56,6 +56,11 @@
                 <td colspan="3" style = "text-align:center" valign="bottom">  
                     <br>
             <a href="{{url_for('routes.postReview', book_id = book.id)}}"> Add Review </a>
+            {% if current_user.user_type == "Admin" %}
+                    <form action = "{{ url_for('routes.deleteBook', book_id = book.id) }}" method="post">
+                        <input type = "submit" value="Delete" class = "button">
+                    </form>
+            {% endif %}
         </td>
 
             </tr>

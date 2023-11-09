@@ -117,3 +117,30 @@ def edit_profile():
     else:
         pass
     return render_template('edit_profile.html', title='Edit Profile', form = eform)
+
+@bp_routes.route('/deleteBook/<book_id>', methods=['DELETE','POST'])
+def deleteBook(book_id):
+    if current_user.user_type != "Admin":
+        return redirect(url_for('routes.index'))
+    book = Book.query.get(book_id)
+    if book != None:
+        for g in book.genres:
+            book.genres.remove(g)
+        db.session.commit()
+        for r in book.reviews:
+            book.reviews.remove(r)
+        db.session.commit()
+        db.session.delete(book)
+        db.session.commit()
+        flash(book.title + ' has been deleted')
+    return redirect(url_for('routes.index'))
+
+@bp_routes.route('/deletereview/<review_id>', methods=['DELETE', 'POST'])
+def deleteReview(review_id):
+    if current_user.user_type == "Admin":
+        return redirect(url_for('routes.index'))
+    review = Review.query.get(review_id)
+    if review != None:
+        db.session.delete(review)
+        db.session.commit()
+    return redirect(url_for('routes.index'))
