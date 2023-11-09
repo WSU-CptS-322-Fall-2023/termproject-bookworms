@@ -10,6 +10,9 @@ def load_user(id):
 reviewBook = db.Table('reviewBook', db.Column('book_id', db.Integer, db.ForeignKey('book.id')),
                     db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
 
+reviewUser = db.Table('reviewUser', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+                      db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
@@ -27,6 +30,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120))
     password_hash = db.Column(db.String(128))
     user_type = db.Column(db.String(50))
+    reviews = db.relationship('Review', secondary = reviewUser, primaryjoin=(reviewUser.c.user_id == id), 
+                           backref=db.backref('reviewUser', lazy='dynamic'), lazy='dynamic' )
 
     __mapper_args__ = {
         'polymorphic_identity': 'User',

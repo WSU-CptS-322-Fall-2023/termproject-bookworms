@@ -34,6 +34,7 @@ def postReview(book_id):
         review = Review(title = rform.title.data, body = rform.body.data)
         # db.session.add(review)
         book.reviews.append(review)
+        current_user.reviews.append(review)
         db.session.commit()
         flash('post successfully created!')
         return redirect(url_for('routes.index')) 
@@ -92,28 +93,3 @@ def roster(genre_id):
         return redirect(url_for('routes.index'))
     
 
-@bp_routes.route('/display_profile', methods=['GET'])
-# @login_required
-def display_profile():
-    emptyform = EmptyForm()
-    return render_template('display_profile.html', title='Display Profile', user = current_user, eform = emptyform)
-
-@bp_routes.route('/edit_profile', methods=['GET', 'POST'])
-#@login_required
-def edit_profile():
-    eform = EditForm()
-    if request.method == 'POST' :
-        # handle form submission
-        if eform.validate_on_submit():
-            current_user.email = eform.email.data
-            current_user.set_password(eform.password.data)
-            db.session.add(current_user)
-            db.session.commit()
-            flash("Your changes have been saved")
-            return redirect(url_for('routes.display_profile'))
-    elif request.method == 'GET':
-        # populate user data
-        eform.email.data = current_user.email
-    else:
-        pass
-    return render_template('edit_profile.html', title='Edit Profile', form = eform)

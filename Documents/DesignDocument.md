@@ -285,12 +285,13 @@ Provide a list of the page templates you plan to create (or you already created)
     - This lets an admin add a new book to the library using the book form.
   10. 404error.html
   11. 500error.html
-  12. user profile page (not implemented yet)
-    - This page will show all the user information, and allow user to edit any of the information.
+  12. display_profile.html
+    - This page shows all the user information and reviews, and allow user to edit any of the information.
+  13. edit_profile.html
+    - This page allows the user to edit their info.
   13. user friends (not implemented yet)
     - This page will display current friends and an option to search and add new friends.
-  14. user reviews (not implemented yet)
-    - This page will display all of the users reviews and give the option to edit a review or delete a review.
+
 
 ![](pageView.jpg)
 
