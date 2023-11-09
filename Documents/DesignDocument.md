@@ -48,8 +48,6 @@ This design document will show the blueprint for the Book App.
 
 This project is the Book App, an app where users can read and write reviews for their favorite books.
 
-At the end of the introduction, provide an overview of the document outline.
-
 [Section II](#2-architectural-and-component-level-design) includes …
 
 [Section III](#22-subsystem-design) includes …
@@ -286,8 +284,6 @@ In iteration 2 Bookworms have implemented the following: preventions for non-use
 
 # 4. Testing Plan
 
-(***in iteration 2***)
-In this section , provide a brief description of how you plan to test the system. Thought should be given to  mostly how automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. Consider the following kinds of testing:
   * *Unit Testing*: We will write unit tests using unittest to test our user models and book models. 
   * *Functional Testing*: We will write automated tests for the routes using pytest, to make sure the routes have the correct functionality. The specific routes we will be   testing are: register, login, and add_book.
   * *UI Testing*: We will do manual testing for the UI by showing peers, asking for their thoughts on the usability and UI.
