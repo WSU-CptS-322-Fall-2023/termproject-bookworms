@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-from flask import Blueprint
+from flask import Blueprint, request
 from flask import render_template, flash, redirect, url_for
 from flask_login import login_user, current_user, logout_user, login_required
 from config import Config
@@ -8,6 +8,7 @@ from config import Config
 from app import db
 from app.Model.models import User, Admin, Regular_User
 from app.Controller.auth_forms import RegistrationForm, LoginForm
+from app.Controller.forms import EditForm, EmptyForm
 
 bp_auth = Blueprint('auth', __name__)
 bp_auth.template_folder = Config.TEMPLATE_FOLDER 
@@ -74,3 +75,29 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('routes.index'))
+
+@bp_auth.route('/display_profile', methods=['GET'])
+# @login_required
+def display_profile():
+    emptyform = EmptyForm()
+    return render_template('display_profile.html', title='Display Profile', user = current_user, eform = emptyform)
+
+@bp_auth.route('/edit_profile', methods=['GET', 'POST'])
+#@login_required
+def edit_profile():
+    eform = EditForm()
+    if request.method == 'POST' :
+        # handle form submission
+        if eform.validate_on_submit():
+            current_user.email = eform.email.data
+            current_user.set_password(eform.password.data)
+            db.session.add(current_user)
+            db.session.commit()
+            flash("Your changes have been saved")
+            return redirect(url_for('routes.display_profile'))
+    elif request.method == 'GET':
+        # populate user data
+        eform.email.data = current_user.email
+    else:
+        pass
+    return render_template('edit_profile.html', title='Edit Profile', form = eform)
