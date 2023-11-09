@@ -310,9 +310,9 @@ In iteration 2 Bookworms have implemented the following: preventions for non-use
 
 (***in iteration 2***)
 In this section , provide a brief description of how you plan to test the system. Thought should be given to  mostly how automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. Consider the following kinds of testing:
-  * *Unit Testing*: Explain for what modules you plan to write unit tests, and what framework you plan to use.  (Each team should write automated tests (at least) for testing the routes)
-  * *Functional Testing*: How will you test your system to verify that the use cases are implemented correctly? 
-  * *UI Testing*: How do you plan to test the user interface?  (Manual tests are OK)
+  * *Unit Testing*: We will write unit tests using unittest to test our user models and book models. 
+  * *Functional Testing*: We will write automated tests for the routes using pytest, to make sure the routes have the correct functionality.
+  * *UI Testing*: We will do manual testing for the UI by showing peers, asking for their thoughts on the usability and UI.
 
 # 5. References
 

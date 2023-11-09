@@ -22,6 +22,7 @@
                     <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
                 {% else %}
                     <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
+                    <td><a href="{{ url_for('auth.display_profile') }}" class = "button"> Profile </a></td>
                 {% endif %}
                 <td> 
                     Current user is: <span class="useritem"> {{ current_user.username }} </span> 
