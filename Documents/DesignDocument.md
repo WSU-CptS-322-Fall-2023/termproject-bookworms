@@ -163,7 +163,7 @@ Briefly explain the role of the model.
   Attributes:
       - id (Primary Key): An integer representing a book genre.
       - name: A string representing the name of the genre.
-      - roster: A roster of all the genres ro a book
+      - roster: A roster of all the genres of a book
       - Relationships:
         - genres. A many-to-many relationship with the Genre table, defined through an association table.
 
@@ -221,30 +221,55 @@ routes subsystem:
     Method: POST
     Description: Handles the process of liking a review. It increments the like count for a review and redirects back to the reviews page for the associated book.
 
+  roster Route:
+    URL: /roster/<genre_id> 
+    Methods: GET 
+    Description: Displays a list of books for a specified genre. Fetches genre and associated books from the database, renders 'roster.html' template. Redirects to the index page if the genre is not found.
+
+  Display Profile Route:
+    URL: /display_profile
+    Methods: GET
+    Description: Displays the user's profile. The profile information is used to show details like the user's username, email, etc. 
+
+  Edit Profile Route:
+    URL: /edit_profile
+    Methods: GET, POST
+    Description: Manages user profile editing. On GET, renders 'edit_profile.html' template with the current user's email pre-filled. On POST validates form submission, updates user email and password, and commits changes to the database.
+
 bp_auth Subsystem:
   - This subsystem is responsible for user authentication and registration.
 
-  admin_registration Route:
-    URL Path: /admin_registration
-    Methods: GET and POST
-    Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
-    regular_registration Route:
+admin_registration Route:
+  URL Path: /admin_registration
+  Methods: GET and POST
+  Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
+  regular_registration Route:
 
-  URL Path: /regular_registration
-    Methods: GET and POST
-    Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
+URL Path: /regular_registration
+  Methods: GET and POST
+  Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
 
-  login Route:
-    URL Path: /login
-    Methods: GET and POST
-    Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
+login Route:
+  URL Path: /login
+  Methods: GET and POST
+  Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
 
-  logout Route:
-    URL Path: /logout
-    Methods: GET and POST
-    Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
+logout Route:
+  URL Path: /logout
+  Methods: GET and POST
+  Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
 
 (***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
+
+|   | Methods           | URL Path   | Description  |
+|:--|:------------------|:-----------|:-------------|
+|1. |                   |            |              |
+|2. |                   |            |              |
+|3. |                   |            |              |
+|4. |                   |            |              |
+|5. |                   |            |              |
+|6. |                   |            |              |
+
 
 ### 2.2.3 View and User Interface Design 
 
@@ -275,21 +300,20 @@ Provide a list of the page templates you plan to create (or you already created)
     - This lets an admin add a new book to the library using the book form.
   10. 404error.html
   11. 500error.html
-  12. display_profile.html
-    - This page shows all the user information and reviews, and allow user to edit any of the information.
-  13. edit_profile.html
-    - This page allows the user to edit their info.
+  12. user profile page (not implemented yet)
+    - This page will show all the user information, and allow user to edit any of the information.
   13. user friends (not implemented yet)
     - This page will display current friends and an option to search and add new friends.
-
+  14. user reviews (not implemented yet)
+    - This page will display all of the users reviews and give the option to edit a review or delete a review.
 
 ![](pageView.jpg)
 
-<img src="homePage.png" alt="image" width="350" height="auto">
-<img src="signinPage.png" alt="image" width="350" height="auto">
-<img src="registerPage.png" alt="image" width="350" height="auto">
-<img src="reviewPage.png" alt="image" width="350" height="auto">
-<img src="createReviewPage.png" alt="image" width="350" height="auto">
+![](homePage.png)
+![](signinPage.png)
+![](registerPage.png)
+![](reviewPage.png)
+![](createReviewPage.png)
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
