@@ -82,8 +82,6 @@ If you adopted the application structure we used in the Smile App, your applicat
 
 ## 2.2 Subsystem Design 
 
-
-
 (**Note2**: You should describe the design for the end product (completed application) - not only your iteration1 version. You will revise this document in iteration-2 and make changes  and/or add more details in iteration-2.)
 
 ### 2.2.1 Model
@@ -324,7 +322,7 @@ In iteration 2 Bookworms have implemented the following: preventions for non-use
 (***in iteration 2***)
 In this section , provide a brief description of how you plan to test the system. Thought should be given to  mostly how automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. Consider the following kinds of testing:
   * *Unit Testing*: We will write unit tests using unittest to test our user models and book models. 
-  * *Functional Testing*: We will write automated tests for the routes using pytest, to make sure the routes have the correct functionality.
+  * *Functional Testing*: We will write automated tests for the routes using pytest, to make sure the routes have the correct functionality. The specific routes we will be   testing are: register, login, and add_book.
   * *UI Testing*: We will do manual testing for the UI by showing peers, asking for their thoughts on the usability and UI.
 
 # 5. References
