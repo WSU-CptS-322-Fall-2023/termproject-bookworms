@@ -39,9 +39,8 @@ Prepared by:
 | Name | Date | Changes | Version |
 | ------ | ------ | --------- | --------- |
 |Revision 1 |2021-10-05 |Initial draft | 1.0        |
-|      |      |         |         |
-|      |      |         |         |
-
+|Revision 2 |2023-10-20 |Iteration 1 | 2.0         |
+|Revision 3 |2023-11-9 |Iteration 2 | 3.0         |
 
 # 1. Introduction
 
@@ -239,37 +238,27 @@ routes subsystem:
 bp_auth Subsystem:
   - This subsystem is responsible for user authentication and registration.
 
-admin_registration Route:
-  URL Path: /admin_registration
-  Methods: GET and POST
-  Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
-  regular_registration Route:
+  admin_registration Route:
+    URL Path: /admin_registration
+    Methods: GET and POST
+    Description: Handles the registration of admin users. It allows admins to create accounts, setting the user type to "Admin."
+    regular_registration Route:
 
-URL Path: /regular_registration
-  Methods: GET and POST
-  Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
+  URL Path: /regular_registration
+    Methods: GET and POST
+    Description: Handles the registration of regular users. It allows regular users to create accounts, setting the user type to "Reg_User."
 
-login Route:
-  URL Path: /login
-  Methods: GET and POST
-  Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
+  login Route:
+    URL Path: /login
+    Methods: GET and POST
+    Description: Handles user login. Users can enter their credentials to log in. If successful, they are redirected to the main index page.
 
-logout Route:
-  URL Path: /logout
-  Methods: GET and POST
-  Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
+  logout Route:
+    URL Path: /logout
+    Methods: GET and POST
+    Description: Allows users to log out of their accounts. After logging out, users are redirected to the main index page.
 
 (***in iteration-2***) Revise your route specifications, add the missing routes to your list, and update the routes you modified. Make sure to provide sufficient detail for each route. In iteration-2, you will be deducted points if you don’t include all major routes needed for implementing the required use-cases or if you haven’t described them in detail.
-
-|   | Methods           | URL Path   | Description  |
-|:--|:------------------|:-----------|:-------------|
-|1. |                   |            |              |
-|2. |                   |            |              |
-|3. |                   |            |              |
-|4. |                   |            |              |
-|5. |                   |            |              |
-|6. |                   |            |              |
-
 
 ### 2.2.3 View and User Interface Design 
 
@@ -300,20 +289,20 @@ Provide a list of the page templates you plan to create (or you already created)
     - This lets an admin add a new book to the library using the book form.
   10. 404error.html
   11. 500error.html
-  12. user profile page (not implemented yet)
-    - This page will show all the user information, and allow user to edit any of the information.
-  13. user friends (not implemented yet)
+  12. display_profile.html
+    - This page shows all the user information and reviews, and allow user to edit any of the information.
+  13. edit_profile.html
+    - This page allows the user to edit their info.
+  14. user friends (not implemented yet)
     - This page will display current friends and an option to search and add new friends.
-  14. user reviews (not implemented yet)
-    - This page will display all of the users reviews and give the option to edit a review or delete a review.
 
 ![](pageView.jpg)
 
-![](homePage.png)
-![](signinPage.png)
-![](registerPage.png)
-![](reviewPage.png)
-![](createReviewPage.png)
+<img src="homePage.png" alt="image" width="350" height="auto">
+<img src="signinPage.png" alt="image" width="350" height="auto">
+<img src="registerPage.png" alt="image" width="350" height="auto">
+<img src="reviewPage.png" alt="image" width="350" height="auto">
+<img src="createReviewPage.png" alt="image" width="350" height="auto">
 
 (***in iteration-1***) Brainstorm with your team members and identify the pages that you think should be created.  If you included most of the major pages, it will be acceptable. 
 
