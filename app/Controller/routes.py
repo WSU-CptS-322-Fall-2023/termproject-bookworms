@@ -24,6 +24,9 @@ def index():
 
 @bp_routes.route('/postreview<book_id>', methods=['GET', 'POST'] )
 def postReview(book_id):
+    if current_user.is_anonymous:
+        return redirect(url_for('routes.index'))
+
     book = Book.query.filter_by(id = book_id).first()
 
     rform = ReviewForm()
@@ -42,6 +45,8 @@ def postReview(book_id):
 @bp_routes.route('/addbook', methods=['GET', 'POST'])
 #@login_required
 def addbook():
+    if current_user.is_anonymous or current_user.user_type != "Admin":
+        return redirect(url_for('routes.index'))
     bform = BookForm()
     if bform.validate_on_submit():
         newBook = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year)
