@@ -286,3 +286,11 @@ def deleteReview(review_id):
         db.session.delete(review)
         db.session.commit()
     return redirect(url_for('routes.index'))
+
+@bp_routes.route('/recommendations', methods=['GET'])
+def recommendations():
+    # reviews = Review.query.order_by(Review.timestamp.desc())
+    # theBook = Book.query.order_by(Book.timestamp.desc())
+
+    # print(reviews)
+    return render_template('recommendations.html')
