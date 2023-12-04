@@ -39,6 +39,7 @@ def postReview(book_id):
         review = Review(title = rform.title.data, body = rform.body.data)
         # db.session.add(review)
         book.reviews.append(review)
+        current_user.reviews.append(review)
         db.session.commit()
         flash('post successfully created!')
         return redirect(url_for('routes.index')) 
@@ -163,9 +164,11 @@ def reviews(book_id):
 def like(review_id, book_id):
     theReview = Review.query.filter_by(id = review_id).first()
     theReview.likes = theReview.likes + 1
+    #theReview.book = book_id
+    #current_user.liked_reviews.append(theReview)
     db.session.add(theReview)
-    db.session.commit()
-
+    db.session.commit
+    
     return redirect(url_for('routes.reviews', book_id=book_id))
 
 @bp_routes.route('/roster/<genre_id>', methods=['GET'])
@@ -284,3 +287,14 @@ def deleteReview(review_id):
         db.session.delete(review)
         db.session.commit()
     return redirect(url_for('routes.index'))
+
+@bp_routes.route('/recommendations', methods=['GET'])
+def recommendations():
+    # reviews = Review.query.order_by(Review.timestamp.desc())
+    # theBook = Book.query.order_by(Book.timestamp.desc())
+    # print(reviews)
+
+    #for review in current_user.liked_reviews:
+
+    return render_template('recommendations.html')
+#'routes.recommendations'

@@ -11,7 +11,13 @@
 
     {%  if user.reviews.count() == 0 %}
     <div class="postbox"> 
-        <h1> No Reviews Yet </h1>
+        <h1> <!--No Reviews Yet--> 
+            {% for liked_review in user.liked_reviews %}
+                <p>
+                    liked reviews: {{liked_review.book}} {{ liked_review.body }}
+                </p>
+            {% endfor %}
+        </h1>
     </div>
 
     {%else%}

@@ -6,11 +6,16 @@ from flask_login import UserMixin
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
+#book - review
 reviewBook = db.Table('reviewBook', db.Column('book_id', db.Integer, db.ForeignKey('book.id')),
                     db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
 
+#review - user
 reviewUser = db.Table('reviewUser', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+                      db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
+
+#user - review likes
+userLikes = db.Table('userLikes', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
                       db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
 
 class Review(db.Model):
@@ -19,7 +24,8 @@ class Review(db.Model):
     body = db.Column(db.String(1500))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     likes = db.Column(db.Integer, default = 0)
-    # book = db.Column(db.Integer, db.ForeignKey('book.id'))
+    
+    book = db.Column(db.Integer, db.ForeignKey('book.id'))
 
     #book = db.relationship('BookReview', back_populates="_review"
 
@@ -30,8 +36,13 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120))
     password_hash = db.Column(db.String(128))
     user_type = db.Column(db.String(50))
+    #index key: 0 - fiction, 1 - non-fiction, 2 - mystery, 3 - romance, 4 - fantasy
+    #genre_frequency = [0,0,0,0,0]
     reviews = db.relationship('Review', secondary = reviewUser, primaryjoin=(reviewUser.c.user_id == id), 
                            backref=db.backref('reviewUser', lazy='dynamic'), lazy='dynamic' )
+    
+    liked_reviews = db.relationship('Review', secondary = userLikes, primaryjoin=(userLikes.c.user_id == id), 
+                           backref=db.backref('userLikes', lazy='dynamic'), lazy='dynamic' )
 
     __mapper_args__ = {
         'polymorphic_identity': 'User',
