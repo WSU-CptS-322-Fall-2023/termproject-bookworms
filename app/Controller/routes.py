@@ -137,7 +137,7 @@ def deleteBook(book_id):
 
 @bp_routes.route('/deletereview/<review_id>', methods=['DELETE', 'POST'])
 def deleteReview(review_id):
-    if current_user.user_type == "Admin":
+    if current_user.user_type != "Admin":
         return redirect(url_for('routes.index'))
     review = Review.query.get(review_id)
     if review != None:
