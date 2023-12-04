@@ -114,7 +114,7 @@ def suggestbook():
 
 @bp_routes.route('/adminSuggestions>', methods=['GET'])
 def adminSuggestions():
-    return render_template('adminSuggestions.html', title="Suggestions:", suggestions = get_suggestions())
+    return render_template('suggestions.html', title="Suggestions:", suggestions = get_suggestions())
 
 @bp_routes.route('/viewSuggestion/<suggestion_id>', methods=['GET'])
 def viewSuggestion(suggestion_id):

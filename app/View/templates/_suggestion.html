@@ -1,15 +1,16 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
 
-<div class ="postbox">
-    <table class = "posttable" style = "width:100%" valign="top">
+<div class ="book-box">
+    <table class = "booktable" style = "width:100%" valign="top">
         <tr> 
-            <td colspan="3" ><div class="posttitle"> {{book.title}}  </div>
+            <br>
+            <td colspan="3" ><div class="posttitle"> <br><br><br><br>{{book.title}}  </div>
             </td>
         </tr>
 
         <tr>
             <td colspan="3" style = "text-align:center" valign="bottom"> 
-                <div> <br> 
+                <div> 
                     By {{ book.author }} ({{book.year}}) </div>
             </td> 
         </tr>
@@ -28,41 +29,46 @@
         <tr>
             <td colspan="3" style = "text-align:center" valign="bottom">  
             <div class="posttimestamp"> 
-                <br>
-                Suggested at: {{ book.timestamp }}
+                Posted at: {{ book.timestamp }}
             </div> 
             </td>
+        </tr>
+            
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                Post by: {{book.posted_by}}
+                <span class="useritem"> ... </span>
+            </td>
+            </tr>
         </tr>
 
         <tr> 
             <td colspan="3" style = "text-align:center" valign="bottom">  
                 <br>
                 {% for genre in book.getGenres() %}
-                    <a class="genreitem" > {{ genre.genres.name }} </a>
+                    <a class="genreitem" href="{{url_for('routes.roster', genre_id=genre.genres.id)}}"> {{ genre.genres.name }} </a>
                 {% endfor %}
             </td>
         </tr>
 
-        
         <tr>
             <td colspan="3" style = "text-align:center" valign="bottom"> 
-                <div> <br> 
-                    Suggested by {{ book.suggested_by }} </div>
-            </td> 
-        </tr>
-
-        <tr>
-            <td colspan="3" style = "text-align:center" valign="bottom"> 
-                <div class="sbottom">
-                    <a  href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" > Accept </a>
-                
-                    <a href="{{ url_for('routes.editSuggestion', suggestion_id = book.id) }}" class="newbutton"> Edit </a>
-            
-                    <a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="newbutton"> Delete </a>
+                <div>
+                    <br>
+                    <a  href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" class="acceptButton"> Accept </a>
+                    <a href="{{ url_for('routes.editSuggestion', suggestion_id = book.id) }}" class="viewButton"> Edit </a>
+                    <a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="deleteButton"> Delete </a>
+                    <br>
                 </div>
+                
+                
             </td> 
         </tr>
-
+        
+    <tr> <br> </tr>
+    <tr> <br> </tr>
+    <tr> <br> </tr>
+    <tr> <br> </tr>
     </table>
     <br>
 </div>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Book Suggestions </h1>
+
+    <div class="postlist"> 
+
+        {% for book in suggestions %}
+            <div class="postbox">
+                {% include 'adminSuggestions.html' %}
+            </div>
+        {% endfor %}
+        <br>
+
+    </div> 
+    
+    <br>
+    <br>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+
+    <a href="{{url_for('routes.index')}}" class = "button"> Return to main page </a>
+{% endblock %}

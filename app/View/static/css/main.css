@@ -76,7 +76,7 @@ a:hover {
     cursor: pointer;
 }
 
-.newbutton {
+.viewButton {
     width : 80px;
     text-align: center;
     padding : 3px;    
@@ -84,14 +84,46 @@ a:hover {
     font-family: Gill Sans, sans-serif;
     margin : 5px;
     padding : 5px;
-    border: 1px solid #f2f2f2;
-}
-.newbutton:hover {
     background-color: #f2f2f2;
+    color: #102E4A;
+}
+.viewButton:hover {
+    background-color: #FFC90E;
     color: #102E4A;
     cursor: pointer;
 }
-
+.acceptButton {
+    width : 80px;
+    text-align: center;
+    padding : 3px;    
+    font-size: 16px;
+    font-family: Gill Sans, sans-serif;
+    margin : 5px;
+    padding : 5px;
+    background-color: #f2f2f2;
+    color: #102E4A;
+}
+.acceptButton:hover {
+    background-color: green;
+    color: #f2f2f2;
+    cursor: pointer;
+}
+.deleteButton {
+    width : 80px;
+    text-align: center;
+    padding : 3px;    
+    font-size: 16px;
+    font-family: Gill Sans, sans-serif;
+    margin : 5px;
+    padding : 5px;
+    background-color: #f2f2f2;
+    color: #102E4A;
+}
+.deleteButton:hover {
+    background-color: #AD0508;
+    color: #f2f2f2;
+    cursor: pointer;
+}
 
 .img {
     width: 190px;
