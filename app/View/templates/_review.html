@@ -58,7 +58,11 @@
                     <tr>
                         <td colspan="3" style = "text-align:center" valign="bottom">  
                             <br>
-
+                            {% if current_user.user_type == "Admin" %}
+                                <form action = "{{ url_for('routes.deleteReview', review_id = review.id) }}" method="post">
+                                    <input type = "submit" value="Delete" class = "button">
+                                </form>
+                            {% endif %}
                         </td>
                         </tr>
                     </tr>
