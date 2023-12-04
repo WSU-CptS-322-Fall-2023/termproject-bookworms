@@ -13,13 +13,16 @@ reviewBook = db.Table('reviewBook', db.Column('book_id', db.Integer, db.ForeignK
 reviewUser = db.Table('reviewUser', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
                       db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
 
+userLikes = db.Table('userLikes', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+                      db.Column('review_id', db.Integer, db.ForeignKey('review.id')))
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     body = db.Column(db.String(1500))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     likes = db.Column(db.Integer, default = 0)
-    # book = db.Column(db.Integer, db.ForeignKey('book.id'))
+    book = db.Column(db.Integer, db.ForeignKey('book.id'))
 
     #book = db.relationship('BookReview', back_populates="_review"
 
@@ -32,6 +35,9 @@ class User(UserMixin, db.Model):
     user_type = db.Column(db.String(50))
     reviews = db.relationship('Review', secondary = reviewUser, primaryjoin=(reviewUser.c.user_id == id), 
                            backref=db.backref('reviewUser', lazy='dynamic'), lazy='dynamic' )
+    
+    liked_reviews = db.relationship('Review', secondary = userLikes, primaryjoin=(userLikes.c.user_id == id), 
+                           backref=db.backref('userLikes', lazy='dynamic'), lazy='dynamic' )
 
     __mapper_args__ = {
         'polymorphic_identity': 'User',

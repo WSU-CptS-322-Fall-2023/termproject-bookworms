@@ -70,4 +70,58 @@
         {% endfor %}
 
     {%  endif %}
+
+    <h1> {{ user.username }}'s Liked Reviews</h1>
+        {% for liked_review in user.liked_reviews %}
+            <div class="postbox">
+                <table class = "posttable" style = "width:100%" valign="top">
+                        <tr> 
+
+                            <td colspan="3"><div class="posttitle"> {{liked_review.title}} {{liked_review.book}} </div>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td width="80%" >
+                                <div class="postmessage">
+
+                                {{ liked_review.body }}
+
+                            </div>
+                            <div class="posttimestamp"> 
+                                Posted at: {{ liked_review.timestamp }}
+                            </div> 
+                            </td> 
+
+                            <td width = "5%"> 
+                                <div class="likecount">
+
+                                    <br>
+                                    {{ liked_review.likes }}
+                                    
+                                </div>
+                                <br> 
+                            </td>
+                        </tr>
+                        
+                        <tr> 
+                            <td colspan="3" style = "text-align:center" valign="bottom">  
+                                <br>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3" style = "text-align:center" valign="bottom">  
+                                <br>
+
+                            </td>
+                            </tr>
+                        </tr>
+
+                </table>
+            </div>
+
+        {% endfor %}
+
 {% endblock %}

@@ -164,6 +164,7 @@ def reviews(book_id):
 def like(review_id, book_id):
     theReview = Review.query.filter_by(id = review_id).first()
     theReview.likes = theReview.likes + 1
+    current_user.liked_reviews.append(theReview)
     db.session.add(theReview)
     db.session.commit()
 
