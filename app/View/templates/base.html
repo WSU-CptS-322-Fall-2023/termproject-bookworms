@@ -1,12 +1,9 @@
 <html>
     <head>
-       {% if title %}
-          <title>{{ title }} - Book App </title>
-       {% else %}
-          <title> Welcome to Book App! </title>
-       {% endif %}
        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
+       <style>
+        h1 {text-align: center;}
+       </style>
     </head>
 
     <body>
@@ -14,22 +11,26 @@
         <table>
             <tr>
                 <br>
-                <td><a href="{{ url_for('routes.index') }}" class = "button">Home</a></td>
+                <td><a href="{{ url_for('routes.index') }}" class="button"> Home </a></td> 
                 {% if current_user.user_type=="Admin" %}
                     <td><a href="{{url_for('routes.addbook')}}" class = "button"> Add Book </a></td> 
                 {% endif %}
-                {% if current_user.is_anonymous %}
-                    <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
-                {% else %}
-                    <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
-                    <td><a href="{{ url_for('auth.display_profile') }}" class = "button"> Profile </a></td>
-                {% endif %}
-                <td> 
+
+                <div class="nav-container-right"> 
+                    {% if current_user.is_anonymous %}
+                        <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
+                    {% else %}
+                        <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
+                        <td><a href="{{ url_for('auth.display_profile') }}" class = "button"> Profile </a></td>
+                    {% endif %}
+                    <td> 
                     Current user is: <span class="useritem"> {{ current_user.username }} </span> 
                     {% if current_user.user_type=="Admin" %}
                         : Admin
                     {% endif %}
-                </td>  
+                    </td>
+                </div>
+                  
             </tr>
         </table>
         </div>

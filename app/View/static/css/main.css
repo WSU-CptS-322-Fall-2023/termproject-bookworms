@@ -10,7 +10,7 @@ red icon color: #930E0E
 
 
 body {
-    background-color: #998FC7;
+    background-color: #B4E3B3;
     color: #102E4A;
     margin: 1px 1px 1px 15px;
     padding: 1px;
@@ -19,11 +19,16 @@ body {
   
 }
 .nav-container {
-    background:#D4C2FC;
+    background:#5B8C58;
+    text-align: center;
     font-family: Gill Sans, sans-serif;
     font-size: 12px;
     height: 50px;
     text-transform: uppercase;
+}
+
+.nav-container-right {
+    float: right;
 }
 a:hover {
 	color:#2387D9;
@@ -47,7 +52,12 @@ a:hover {
 .posttable { 
     width : 100%;
     margin: 0px;
-    background:#D4C2FC;
+}
+
+.booktable { 
+    width : 100%;
+    margin: 0px;
+    background-image: url("..//images//testBBackround.png");
 }
 
 .postbooktitle {
@@ -143,6 +153,8 @@ a:hover {
     -moz-background-size: contain;
     -o-background-size: contain;
 } 
+
+
 .likebtn:hover {
     background-image: url("..//images//heart_hover.png");
     cursor:pointer;
@@ -164,9 +176,9 @@ a:hover {
 .postbox{
     display: flex; 
     vertical-align: middle;
-    background-color: #D4C2FC;
+    background-image: url("..//images//testBBackround.png");
     font-family: Gill Sans, sans-serif;
-    width: 20%;
+    width: 16%;
     margin: 5px 5px 5px 5px;
 }
 
@@ -182,8 +194,8 @@ a:hover {
 @media screen and (min-width: 800px) and (max-width:1200px){
     .postbox{
         display: flex; 
-        vertical-align: middle;
-        background-color: #D4C2FC;
+        vertical-align: middle; 
+        background-image: url("..//images//testBBackround.png");
         font-family: Gill Sans, sans-serif;
         width: 48%;
         margin: 5px 5px 5px 5px;
@@ -194,9 +206,9 @@ a:hover {
     .postbox{
         display: flex; 
         vertical-align: middle;
-        background-color: #D4C2FC;
+        background-image: url("..//images//testBBackround.png");
         font-family: Gill Sans, sans-serif;
-        width: 99%;
+        width: 50%;
         margin: 5px 5px 5px 5px;
     }
 }
@@ -205,9 +217,9 @@ a:hover {
     .postbox{
         display: flex; 
         vertical-align: middle;
-        background-color: #D4C2FC;
+        background-image: url("..//images//testBBackround.png");
         font-family: Gill Sans, sans-serif;
-        width: 32%;
+        width: 24%;
         margin: 5px 5px 5px 5px;
     }
 }
