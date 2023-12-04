@@ -1,13 +1,18 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, SubmitField, SelectField, TextAreaField, PasswordField
+from wtforms import StringField, SubmitField, SelectField, TextAreaField, PasswordField, FileField
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import  ValidationError, Length, DataRequired, Email, EqualTo
 from wtforms.widgets import ListWidget, CheckboxInput
 from app.Model.models import Review, Book, Year, Genre, User
 
 def get_book():
-    return Book.query.all()
+    # return Book.query.all()
+    return Book.query.filter(Book.posted == True).all()
+    # return session.query(Book).filter(Book.suggested_by.is_(None)).all()
+
+def get_suggestions():
+    return Book.query.filter(Book.posted == False).all()
 
 def get_booklabel(theBook):
     return theBook.title
@@ -33,6 +38,7 @@ class ReviewForm(FlaskForm):
 
 class BookForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
+    cover = FileField('Browse Image')
     author = StringField('Author', validators=[DataRequired()])
     year = QuerySelectField('Year', query_factory = get_year, get_label = get_year_label, allow_blank = False)
     genre = QuerySelectMultipleField('Genres', query_factory =get_genre, get_label=get_genrelabel, 
@@ -56,4 +62,11 @@ class EditForm(FlaskForm):
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
 
-
+class EditSuggestionForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    cover = FileField('Browse Image')
+    author = StringField('Author', validators=[DataRequired()])
+    year = QuerySelectField('Year', query_factory = get_year, get_label = get_year_label, allow_blank = False)
+    genre = QuerySelectMultipleField('Genres', query_factory =get_genre, get_label=get_genrelabel, 
+                                   widget=ListWidget(prefix_label=False), option_widget = CheckboxInput())
+    submit = SubmitField('Submit')

@@ -14,18 +14,19 @@
                 <td><a href="{{ url_for('routes.index') }}" class="button"> Home </a></td> 
                 {% if current_user.user_type=="Admin" %}
                     <td><a href="{{url_for('routes.addbook')}}" class = "button"> Add Book </a></td> 
+                    <td><a href="{{url_for('routes.adminSuggestions')}}" class = "button"> Suggestions </a></td> 
+                {% elif current_user.user_type=="Reg_User" %}
+                    <td><a href="{{ url_for('routes.suggestbook') }}" class="button"> Suggest Book </a></td>
                 {% endif %}
-
-                <div class="nav-container-right"> 
-                    {% if current_user.is_anonymous %}
-                        <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
-                    {% else %}
-                        <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
-                        <td><a href="{{ url_for('auth.display_profile') }}" class = "button"> Profile </a></td>
-                    {% endif %}
-                    <td> 
+                {% if current_user.is_anonymous %}
+                    <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
+                {% else %}
+                    <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
+                    <td><a href="{{ url_for('auth.display_profile') }}" class = "button"> Profile </a></td>
+                {% endif %}
+                <td> 
                     Current user is: <span class="useritem"> {{ current_user.username }} </span> 
-                    {% if current_user.user_type=="Admin" %}
+                    {% if current_user.user_type == "Admin" %}
                         : Admin
                     {% endif %}
                     </td>

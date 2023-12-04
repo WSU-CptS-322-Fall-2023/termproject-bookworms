@@ -12,6 +12,15 @@
             </td> 
         </tr>
 
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom"> 
+                <div> <br> 
+                    {% if book.cover %}
+                        <img src="{{ url_for('static', filename=book.cover.replace('\\', '/')) }}" class="img">
+                    {% endif %}
+            </td> 
+        </tr>
+
         
         <td width="80%" >
         <tr>
@@ -47,6 +56,8 @@
             <a href="{{url_for('routes.reviews', book_id=book.id)}}"> Reviews </a> <br>
             <a href="{{url_for('routes.postReview', book_id = book.id)}}"> Add Review </a>
         </td>
-    
+
+            </tr>
+        </td>
 
 </table>

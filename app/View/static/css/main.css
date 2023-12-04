@@ -49,6 +49,12 @@ a:hover {
     cursor:pointer;
 }
 
+
+.img {
+    width: 190px;
+    height: 200px;
+}
+
 .posttable { 
     width : 100%;
     margin: 0px;
@@ -100,7 +106,7 @@ a:hover {
 }
 
 .formtitle{
-    text-align: left;
+    text-align: center;
     font-family: Gill Sans, sans-serif;
 	font-size: 16px;
     padding: 2px;
@@ -108,7 +114,7 @@ a:hover {
 }
 
 .formbody{
-    text-align: left;
+    text-align: center;
 	padding: 2px;
 	font-family: Gill Sans, sans-serif;
 	font-size: 18px;
@@ -153,8 +159,6 @@ a:hover {
     -moz-background-size: contain;
     -o-background-size: contain;
 } 
-
-
 .likebtn:hover {
     background-image: url("..//images//heart_hover.png");
     cursor:pointer;
