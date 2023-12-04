@@ -61,12 +61,3 @@ class EditForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
-
-class EditSuggestionForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    cover = FileField('Browse Image')
-    author = StringField('Author', validators=[DataRequired()])
-    year = QuerySelectField('Year', query_factory = get_year, get_label = get_year_label, allow_blank = False)
-    genre = QuerySelectMultipleField('Genres', query_factory =get_genre, get_label=get_genrelabel, 
-                                   widget=ListWidget(prefix_label=False), option_widget = CheckboxInput())
-    submit = SubmitField('Submit')

@@ -53,14 +53,12 @@
 
         <tr>
             <td colspan="3" style = "text-align:center" valign="bottom"> 
-                <div> <br> 
-                    <td><a href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" class="button"> Accept </a></td>
+                <div class="sbottom">
+                    <a  href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" > Accept </a>
                 
-                <br>
-                <td><a href="{{ url_for('routes.editSuggestion', suggestion_id = book.id) }}" class="button"> Edit </a></td>
+                    <a href="{{ url_for('routes.editSuggestion', suggestion_id = book.id) }}" class="newbutton"> Edit </a>
             
-                    <br>
-                <td><a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="button"> Delete </a></td>
+                    <a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="newbutton"> Delete </a>
                 </div>
             </td> 
         </tr>

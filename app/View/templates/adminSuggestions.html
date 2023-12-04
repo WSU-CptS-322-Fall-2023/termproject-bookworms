@@ -1,35 +1,31 @@
 {% for book in suggestions %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
 
+<div class ="postbox">
 <table class = "posttable" style = "width:100%" valign="top">
     <tr> 
-        <td colspan="3" ><div class="posttitle"> {{book.title}}  </div>
+        <td colspan="3" style = "text-align:center" valign="bottom" >
+            <div class="posttitle"> {{book.title}}  </div>
         </td>
     </tr>
 
     <tr>
         <td colspan="3" style = "text-align:center" valign="bottom"> 
-            <div class = "postbox" > <br> 
-                <td><a href="{{ url_for('routes.viewSuggestion', suggestion_id = book.id) }}" class="button"> View </a></td>
+            <div> 
+                Suggested by {{ book.suggested_by }} </div>
         </td> 
     </tr>
 
     <tr>
         <td colspan="3" style = "text-align:center" valign="bottom"> 
-            <div> <br> 
-                <td><a href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" class="button"> Accept </a></td>
-        </td> 
-    </tr>
-        
-    <tr>
-        <td colspan="3" style = "text-align:center" valign="bottom">  
-            <br>
-            <td><a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="button"> Delete </a></td>
-        </td>
-        </tr>
+            <div class = "sbottom" > <br> 
+                <td><a href="{{ url_for('routes.viewSuggestion', suggestion_id = book.id) }}" class="newbutton"> View </a>
+                    <a href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" class="newbutton"> Accept </a>
+                    <a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="newbutton"> Delete </a></td>
     </tr>
 
 </table>
+</div>
 {% endfor %}
 
 <br>
