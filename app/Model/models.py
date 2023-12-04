@@ -19,9 +19,6 @@ class Review(db.Model):
     body = db.Column(db.String(1500))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     likes = db.Column(db.Integer, default = 0)
-    # book = db.Column(db.Integer, db.ForeignKey('book.id'))
-
-    #book = db.relationship('BookReview', back_populates="_review"
 
 
 class User(UserMixin, db.Model): 
@@ -67,7 +64,7 @@ class Regular_User(User):
     }
 
 
-class Book(db.Model):     ##### not sure if the relationship is how this works? #####
+class Book(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     cover = db.Column(db.String(200))
@@ -104,7 +101,6 @@ class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     roster = db.relationship('Roster', back_populates="genres")
-    # sroster = db.relationship('Roster', back_populates="sgenres")
 
     def __repr__(self):
         return '{}'.format(self.name)
