@@ -1,13 +1,18 @@
 from __future__ import print_function
 import sys
 from flask import Blueprint
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, send_from_directory
 from flask_login import current_user
 from config import Config
+from werkzeug.utils import secure_filename
+from io import BytesIO
+
 
 from app import db
 from app.Model.models import Review, Book, Genre, Roster
-from app.Controller.forms import ReviewForm, BookForm, get_book, EmptyForm, EditForm
+from app.Controller.forms import ReviewForm, BookForm, get_book, EmptyForm, EditForm, get_suggestions, EditSuggestionForm
+
+import os
 
 bp_routes = Blueprint('routes', __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
@@ -49,9 +54,22 @@ def addbook():
         return redirect(url_for('routes.index'))
     bform = BookForm()
     if bform.validate_on_submit():
-        newBook = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year)
+        image = bform.cover.data
+        imgPath = None
+        if image:
+            my_folder = 'app\\View\\static\\covers'
+
+            if not os.path.exists(my_folder):
+                os.makedirs(my_folder)
+            imgPath = os.path.join(my_folder, secure_filename(image.filename))
+            image.save(imgPath)
+            imgPath = os.path.join('covers', secure_filename(image.filename))
+
+        
+        newBook = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year, cover=imgPath)
         for t in bform.genre.data:
             newBook.addGenre(t)
+
         db.session.add(newBook)
         db.session.commit()
 
@@ -60,6 +78,77 @@ def addbook():
         return redirect(url_for('routes.index'))
     
     return render_template('add_book.html', form = bform)
+
+
+@bp_routes.route('/suggestbook', methods=['GET', 'POST'])
+#@login_required
+def suggestbook():
+    # if current_user.is_anonymous or current_user.user_type != "Regular_User":
+    #     return redirect(url_for('routes.index'))
+    bform = BookForm()
+    if bform.validate_on_submit():
+        image = bform.cover.data
+        imgPath = None
+        if image:
+            my_folder = 'app\\View\\static\\covers'
+
+            if not os.path.exists(my_folder):
+                os.makedirs(my_folder)
+            imgPath = os.path.join(my_folder, secure_filename(image.filename))
+            image.save(imgPath)
+            imgPath = os.path.join('covers', secure_filename(image.filename))
+
+        
+        newSuggestion = Book(title=bform.title.data, author=bform.author.data, year=bform.year.data.year,
+                                     cover=imgPath, suggested_by=current_user.username, posted=False)
+        for t in bform.genre.data:
+            newSuggestion.addGenre(t)
+
+        title = newSuggestion.title
+        db.session.add(newSuggestion)
+        db.session.commit()
+
+        flash('A suggestion to add "' + title + '" has been added!')
+
+        return redirect(url_for('routes.index'))
+    
+    return render_template('add_book.html', form = bform)
+
+@bp_routes.route('/adminSuggestions>', methods=['GET'])
+def adminSuggestions():
+    return render_template('adminSuggestions.html', title="Suggestions:", suggestions = get_suggestions())
+
+@bp_routes.route('/viewSuggestion/<suggestion_id>', methods=['GET'])
+def viewSuggestion(suggestion_id):
+    newSuggestion = Book.query.filter_by(id = suggestion_id).first()
+    return render_template('_suggestion.html', book = newSuggestion)
+
+@bp_routes.route('/acceptSuggestion/<suggestion_id>', methods=['GET', 'POST'])
+def acceptSuggestion(suggestion_id):
+    newSuggestion = Book.query.filter_by(id = suggestion_id).first()
+    newBook = Book(title=newSuggestion.title, author=newSuggestion.author, year=newSuggestion.year, cover=newSuggestion.cover,
+                    genres = newSuggestion.genres, suggested_by=newSuggestion.suggested_by)
+
+    db.session.add(newBook)
+    db.session.commit()
+
+    return redirect(url_for('routes.deleteSuggestion', suggestion_id = suggestion_id))
+
+@bp_routes.route('/deleteSuggestion/<suggestion_id>', methods=['GET', 'POST'])
+def deleteSuggestion(suggestion_id):
+    newSuggestion = Book.query.filter_by(id = suggestion_id).first()
+    if newSuggestion is None:
+        flash('Suggestion with id "{}" not found.'.format(suggestion_id))
+        return redirect(url_for('routes.adminSuggestions'))
+    for g in newSuggestion.genres:
+        newSuggestion.genres.remove(g)
+
+    title = newSuggestion.title
+    db.session.delete(newSuggestion)
+    db.session.commit()
+
+    flash('Suggestion "{}" was removed.'.format(title))
+    return redirect(url_for('routes.adminSuggestions'))
 
 @bp_routes.route('/reviews<book_id>', methods=['GET'])
 #@login_required
@@ -117,3 +206,54 @@ def edit_profile():
     else:
         pass
     return render_template('edit_profile.html', title='Edit Profile', form = eform)
+
+@bp_routes.route('/editSuggestion/<suggestion_id>', methods=['GET', 'POST'])
+#@login_required
+def editSuggestion(suggestion_id):
+    suggestion = Book.query.filter_by(id = suggestion_id).first()
+    sform = EditSuggestionForm()
+    if request.method == 'POST' :
+        # handle form submission
+        if sform.validate_on_submit():
+            suggestion.title = sform.title.data
+            image = sform.cover.data
+            imgPath = None
+            if image:
+                my_folder = 'app\\View\\static\\covers'
+
+                # if image.filename not in my_folder:
+                if not os.path.exists(my_folder):
+                    os.makedirs(my_folder)
+                # if not os.path.exists(my_folder + '\\' + image.filename):
+
+                imgPath = os.path.join(my_folder, secure_filename(image.filename))
+                image.save(imgPath)
+                imgPath = os.path.join('covers', secure_filename(image.filename))
+
+            suggestion.cover = imgPath
+            suggestion.author = sform.author.data
+            suggestion.year = sform.year.data.year
+            
+            for t in sform.genre.data:
+                suggestion.addGenre(t)
+
+            db.session.add(suggestion)
+            db.session.commit()
+
+            flash("Your changes have been saved")
+            return redirect(url_for('routes.adminSuggestions'))
+    elif request.method == 'GET':
+        # populate user data
+        sform.title.data = suggestion.title
+        sform.cover.data = suggestion.cover
+        sform.author.data = suggestion.author
+        sform.year.data = suggestion.year
+        sform.genre.data = suggestion.genres
+        # genres = []
+        # for g in suggestion.genres:
+        #     genres.append(g)
+        # sform.genre.data = genres
+            
+    else:
+        pass
+    return render_template('editSuggestion.html', title='Edit Suggestion', form = sform)

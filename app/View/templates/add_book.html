@@ -6,7 +6,7 @@
 
     {% if form %}
 
-        <form action="" method="post">
+        <form action="" method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <div>
                 <!--Displays the form item for the post's `title`.--> 
@@ -21,6 +21,13 @@
                 {{ form.author(class="formtitle") }}<br>
 
                 {% for error in form.author.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                {{ form.cover.label }}<br>
+                {{ form.cover(class="formtitle") }}<br>
+
+                {% for error in form.cover.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
 

@@ -11,6 +11,15 @@
             </td> 
         </tr>
 
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom"> 
+                <div> <br> 
+                    {% if book.cover %}
+                        <img src="{{ url_for('static', filename=book.cover.replace('\\', '/')) }}" class="img">
+                    {% endif %}
+            </td> 
+        </tr>
+
         
         <td width="80%" >
         <tr>
@@ -60,5 +69,12 @@
 
             </tr>
         </td>
+        <td colspan="3" style = "text-align:center" valign="bottom">  
+            <br>
+            {% if book.suggested_by %}
+            Suggested by: {{ book.suggested_by }}
+            {% endif %}
+        </td>
+        </tr>
 
 </table>

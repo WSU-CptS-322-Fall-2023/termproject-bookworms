@@ -65,15 +65,18 @@ class Regular_User(User):
     __mapper_args__ = {
         'polymorphic_identity': 'Reg_User'
     }
-    
+
 
 class Book(db.Model):     ##### not sure if the relationship is how this works? #####
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
+    cover = db.Column(db.String(200))
     author = db.Column(db.String(30))
     year = db.Column(db.Integer, db.ForeignKey('year.year'))
-    genres = db.relationship('Roster', back_populates="bookgenres")
+    genres = db.relationship('Roster', back_populates="bookgenres", cascade="all, delete-orphan")
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    suggested_by = db.Column(db.String(50), default=None)
+    posted = db.Column(db.Boolean, default = True )
 
     reviews = db.relationship('Review', secondary = reviewBook, primaryjoin=(reviewBook.c.book_id == id), 
                            backref=db.backref('reviewBook', lazy='dynamic'), lazy='dynamic' )
@@ -91,8 +94,6 @@ class Book(db.Model):     ##### not sure if the relationship is how this works? 
         self.genres.append(newG)
         db.session.commit()
 
-    # reviews = db.relationship('Review', back_populates="book")
-
 class Year(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
@@ -102,6 +103,7 @@ class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     roster = db.relationship('Roster', back_populates="genres")
+    # sroster = db.relationship('Roster', back_populates="sgenres")
 
     def __repr__(self):
         return '{}'.format(self.name)
@@ -112,3 +114,5 @@ class Roster(db.Model):
     genreid = db.Column(db.Integer, db.ForeignKey('genre.id'), primary_key=True)
     bookgenres = db.relationship('Book')
     genres = db.relationship('Genre')
+
+
