@@ -1,76 +1,41 @@
+<table class = "posttable" style = "width:100%" valign="top">
+    <tr> 
+        <td 
+            colspan="3"><div class="posttitle"><br> {{review.title}} </div>                         
+        </td>
+    </tr>
 
-<!-- <div> Blank </div> -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <tr>
+        <td colspan="3" style = "text-align:center" valign="bottom">
+            <div class="postmessage"> {{ review.body }}</div>
+        </td> 
+    </tr>
 
-{%  if reviews.count() == 0 %}
-    <div class="postbox"> 
-        <h1> No Reviews Yet </h1>
-    </div>
-
-{%else%}
-
-    <h1> {{ book.title }}'s Reviews</h1>
-    {% for review in reviews %}
-        <div class="postbox">
-            <table class = "posttable" style = "width:100%" valign="top">
-                    <tr> 
-                        {{review.book}}
-
-                        <td colspan="3"><div class="posttitle"> {{review.title}} </div>
-                        <td colspan="3"><div class="postbooktitle"> {{review.book}} </div>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td width="80%" >
-                            <div class="postmessage">
-
-                            {{ review.body }}
-
-                        </div>
-                        <div class="posttimestamp"> 
-                            Posted at: {{ review.timestamp }}
-                        </div> 
-                        </td> 
-
-                        <td width = "5%"> 
-                            <div class="likecount">
-                                <form  action="{{url_for('routes.like', review_id = review.id, book_id=book.id)}}" method="post" >
-                                    <input class="likebtn" type="submit" value="" >
-                
-                                    </form>
-
-                                <br>
-                                {{ review.likes }}
+    <tr>
+        <td colspan="3" style="text-align:right" width="50%" valign="bottom">
+            <div class="likecount">
+                <br><br>
+                <form  action="{{url_for('routes.like', review_id = review.id, book_id=book.id)}}" method="post" > 
+                    {{ review.likes }} 
+                <input class="likebtn" type="submit" value="" > 
+                </form>
                                 
-                            </div>
-                            <br> 
-                        </td>
-                    </tr>
+            </div>
+        </td>
+    </tr>
                     
-                    <tr> 
-                        <td colspan="3" style = "text-align:center" valign="bottom">  
-                            <br>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="3" style = "text-align:center" valign="bottom">  
-                            <br>
-
-                        </td>
-                        </tr>
-                    </tr>
-
-            </table>
+    <tr> 
+        <td colspan="3" style = "text-align:center" valign="bottom">  
+            <div class="posttimestamp"> 
+            Posted at: {{ review.timestamp }}
+            <br>
+            <br> 
         </div>
+        </td>
+    </tr>
 
-    {% endfor %}
+</table>
 
-{%  endif %}
-<br>
-<br>
-<a href="{{url_for('routes.index')}}" class = "button"> Return to main page </a>
+
 
     

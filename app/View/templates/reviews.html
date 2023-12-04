@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>{{ book.title }}'s Reviews</h1>
+
+    <div class="postlist"> 
+
+        {%  if reviews.count() == 0 %}
+            <br>
+            <h1> No Reviews Yet </h1>
+        {%else%}
+
+            {% for review in reviews %}
+                <div class="postbox">
+                    {% include '_review.html' %}
+               </div>
+            {% endfor %}
+        {% endif %}
+
+    </div> 
+
+    <br>
+    <br>
+    <a href="{{url_for('routes.index')}}" class = "button"> Return to main page </a>
+{% endblock %}

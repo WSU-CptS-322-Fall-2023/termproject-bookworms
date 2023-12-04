@@ -7,33 +7,25 @@
     </head>
 
     <body>
-        <div class ="nav-container">
-        <table>
-            <tr>
-                <br>
-                <td><a href="{{ url_for('routes.index') }}" class="button"> Home </a></td> 
+        <div class ="topnav">
+                <a href="{{ url_for('routes.index') }}"> Home </a>
                 {% if current_user.user_type=="Admin" %}
-                    <td><a href="{{url_for('routes.addbook')}}" class = "button"> Add Book </a></td> 
-                    <td><a href="{{url_for('routes.adminSuggestions')}}" class = "button"> Suggestions </a></td> 
+                    <a href="{{url_for('routes.addbook')}}"> Add Book </a>
+                    <a href="{{url_for('routes.adminSuggestions')}}" > Suggestions </a>
                 {% elif current_user.user_type=="Reg_User" %}
-                    <td><a href="{{ url_for('routes.suggestbook') }}" class="button"> Suggest Book </a></td>
+                    <a href="{{ url_for('routes.suggestbook') }}"> Add Book </a>
                 {% endif %}
-                {% if current_user.is_anonymous %}
-                    <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
-                {% else %}
-                    <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
-                    <td><a href="{{ url_for('auth.display_profile') }}" class = "button"> Profile </a></td>
-                {% endif %}
-                <td> 
-                    Current user is: <span class="useritem"> {{ current_user.username }} </span> 
-                    {% if current_user.user_type == "Admin" %}
-                        : Admin
+                <div class="topnav-right">
+                    
+                    {% if current_user.is_anonymous %}
+                        <a href="{{ url_for('auth.login') }}" > Login </a>
+                    {% else %}
+                        <a href="{{ url_for('auth.logout') }}"> Logout </a>
+                        <a href="{{ url_for('auth.display_profile') }}" > Profile </a>
                     {% endif %}
-                    </td>
+                    
                 </div>
-                  
-            </tr>
-        </table>
+
         </div>
         <div>
             {% with messages = get_flashed_messages() %}
@@ -46,6 +38,8 @@
 
             {% block content %} {% endblock %}
         </div>
+
+        
 
     </body>
 </html>

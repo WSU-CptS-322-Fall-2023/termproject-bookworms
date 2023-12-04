@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2> Display Student Profile</h1>
-    <h3> User username: {{user.username}}</h2>
+    <h2> Book App Profile </h1>
+    <h3> User username: {{user.username}}</h2> 
+    
+        {% if current_user.user_type == "Admin" %}
+            <p> <b>User type:</b> Admin</p> 
+        {% else %}
+            <p> <b>User type:</b> Regular</p>
+        {% endif %}
     <p> <b>Email:</b> {{user.email}}</p>
     
     {% if user == current_user %}
@@ -10,8 +16,8 @@
     {% endif %}
 
     {%  if user.reviews.count() == 0 %}
-    <div class="postbox"> 
-        <h1> No Reviews Yet </h1>
+    <div> 
+        <h2> No Reviews Yet </h2>
     </div>
 
     {%else%}
