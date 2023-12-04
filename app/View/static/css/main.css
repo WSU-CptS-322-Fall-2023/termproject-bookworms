@@ -37,6 +37,23 @@ body {
     color: #102E4A;
   }
 
+  .sbottom a {
+    float: left;
+    text-decoration-color: #5e5858;
+    color: #fafafa ;
+    text-align: center;
+    padding:  14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: rgb(15, 15, 15);
+    border: 1px solid #f2f2f2;
+  }
+
+.sbottom a:hover {
+    background-color: #fcfcfc;;
+    color: #50575e;
+  }
+
 .topnav-right {
     float: right;
   }
@@ -58,6 +75,23 @@ a:hover {
     color: #102E4A;
     cursor: pointer;
 }
+
+.newbutton {
+    width : 80px;
+    text-align: center;
+    padding : 3px;    
+    font-size: 16px;
+    font-family: Gill Sans, sans-serif;
+    margin : 5px;
+    padding : 5px;
+    border: 1px solid #f2f2f2;
+}
+.newbutton:hover {
+    background-color: #f2f2f2;
+    color: #102E4A;
+    cursor: pointer;
+}
+
 
 .img {
     width: 190px;

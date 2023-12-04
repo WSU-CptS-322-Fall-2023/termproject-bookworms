@@ -77,6 +77,7 @@ class Book(db.Model):     ##### not sure if the relationship is how this works? 
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     suggested_by = db.Column(db.String(50), default=None)
     posted = db.Column(db.Boolean, default = True )
+    posted_by = db.Column(db.String(30))
 
     reviews = db.relationship('Review', secondary = reviewBook, primaryjoin=(reviewBook.c.book_id == id), 
                            backref=db.backref('reviewBook', lazy='dynamic'), lazy='dynamic' )

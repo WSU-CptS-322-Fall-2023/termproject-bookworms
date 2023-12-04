@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Edit Suggestion</h1>
+    {% if form %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div>
+            <!--Displays the form item for the post's `title`.--> 
+            {{ form.title.label }}<br>
+            {{ form.title(class="formtitle") }}<br>
+
+            {% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+
+            {{ form.author.label }}<br>
+            {{ form.author(class="formtitle") }}<br>
+
+            {% for error in form.author.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+
+            {{ form.cover.label }}<br>
+            {{ form.cover(class="formtitle") }}<br>
+
+            {% for error in form.cover.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+
+            <br>
+            {{ form.year.label }}
+            {{ form.year(class="formselect") }}
+            <br>
+            <br>
+
+            {{ form.genre.label }}
+            {{ form.genre() }}
+            
+        
+            <br>
+            <br>
+            <!-- still need to include body -->
+        
+        {{ form.submit(class="button") }}
+        </div>
+    </form>
+    {% endif %}
+
+{% endblock %}
