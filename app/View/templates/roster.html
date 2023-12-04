@@ -3,11 +3,15 @@
 {% block content %}
     <h1> {{ genre }} books </h1>
 
-    {% for book in books %}
-        <div class="postbox">
-            {% include '_book.html' %}
-        </div>
-    {% endfor %}
-    <br>
+    <div class="postlist"> 
+
+        {% for book in books %}
+            <div class="book-box">
+                {% include '_book.html' %}
+            </div>
+        {% endfor %}
+        <br>
+
+    </div> 
 
 {% endblock %}

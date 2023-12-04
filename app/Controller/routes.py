@@ -155,7 +155,7 @@ def deleteSuggestion(suggestion_id):
 def reviews(book_id):
     book = Book.query.filter_by(id = book_id).first()
 
-    return render_template('_review.html', reviews = book.reviews, book = book)
+    return render_template('reviews.html', reviews = book.reviews, book = book)
 
 
 @bp_routes.route('/like/<review_id> <book_id>', methods=['POST'])
