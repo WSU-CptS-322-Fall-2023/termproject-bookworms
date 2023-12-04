@@ -1,0 +1,39 @@
+{% for book in suggestions %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+
+<table class = "posttable" style = "width:100%" valign="top">
+    <tr> 
+        <td colspan="3" ><div class="posttitle"> {{book.title}}  </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3" style = "text-align:center" valign="bottom"> 
+            <div class = "postbox" > <br> 
+                <td><a href="{{ url_for('routes.viewSuggestion', suggestion_id = book.id) }}" class="button"> View </a></td>
+        </td> 
+    </tr>
+
+    <tr>
+        <td colspan="3" style = "text-align:center" valign="bottom"> 
+            <div> <br> 
+                <td><a href="{{ url_for('routes.acceptSuggestion', suggestion_id = book.id) }}" class="button"> Accept </a></td>
+        </td> 
+    </tr>
+        
+    <tr>
+        <td colspan="3" style = "text-align:center" valign="bottom">  
+            <br>
+            <td><a href="{{ url_for('routes.deleteSuggestion', suggestion_id = book.id) }}" class="button"> Delete </a></td>
+        </td>
+        </tr>
+    </tr>
+
+</table>
+{% endfor %}
+
+<br>
+<br>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> 
+
+<a href="{{url_for('routes.index')}}" class = "button"> Return to main page </a>
