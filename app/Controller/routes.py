@@ -39,6 +39,7 @@ def postReview(book_id):
         review = Review(title = rform.title.data, body = rform.body.data)
         # db.session.add(review)
         book.reviews.append(review)
+        current_user.reviews.append(review)
         db.session.commit()
         flash('post successfully created!')
         return redirect(url_for('routes.index')) 
