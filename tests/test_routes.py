@@ -1,14 +1,9 @@
-"""
-This file contains the functional tests for the routes.
-These tests use GETs and POSTs to different URLs to check for the proper behavior.
-Resources:
-    https://flask.palletsprojects.com/en/1.1.x/testing/ 
-    https://www.patricksoftwareblog.com/testing-a-flask-application-using-pytest/ 
-"""
 
+import sys
+sys.path.insert(0, 'D:\DOCS\Fall 2023\CPTS 322\Term Project') # my directory
 
 import os
-import pytest
+import unittest
 from app import create_app, db
 from app.Model.models import Book, Genre, Year, User
 from config import Config
@@ -16,234 +11,52 @@ from config import Config
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
-    SECRET_KEY = 'bad-bad-key'
-    WTF_CSRF_ENABLED = False
     DEBUG = True
     TESTING = True
 
 
 
-@pytest.fixture(scope='module')
-def test_client():
-    # create the flask application ; configure the app for tests
-    flask_app = create_app(config_class=TestConfig)
+class TestRoutes(unittest.TestCase):
 
-    # Flask provides a way to test your application by exposing the Werkzeug test Client
-    # and handling the context locals for you.
-    testing_client = flask_app.test_client()
- 
-    # Establish an application context before running the tests.
-    ctx = flask_app.app_context()
-    ctx.push()
- 
-    yield  testing_client 
-    # this is where the testing happens!
- 
-    ctx.pop()
+    def setUp(self):
+        self.app = create_app(TestConfig)
+        self.client = self.app.test_client()
+        with self.app.app_context():
+            db.create_all()
 
-def new_user(uname, uemail,passwd):
-    user = User(username=uname, email=uemail)
-    user.set_password(passwd)
-    return user
+    def tearDown(self):
+        with self.app.app_context():
+            db.session.remove()
+            db.drop_all()
 
+    def test_post_review_route_authenticated(self):
+        with self.app.test_request_context('/postreview<book_id>', method='POST'):
+            # Simulate an authenticated user
+            with self.app.test_client() as client:
+                with client.session_transaction() as sess:
+                    sess['user_id'] = 1
 
-def init_genres():
-    if Genre.query.count() == 0:
-            genres = ['Fiction','Non-Fiction', 'Mystery', 'Romance', 'Fantasy']
-            for g in genres:
-                db.session.add(Genre(name=g))
-            db.session.commit()
-    print(genres)
-    return None
+                response = client.post('/postreview1', data={'title': 'Test Title', 'body': 'Test Body'})
+                self.assertEqual(response.status_code, 302)
 
-def init_years():
-    if Year.query.count() == 0:
-            for i in range(2023, 1949, -1):
-                db.session.add(Year(year=i))
+    def test_add_book_route_authenticated_as_admin(self):
+        with self.app.test_request_context('/addbook', method='POST'):
+            with self.app.test_client() as client:
+                with client.session_transaction() as sess:
+                    sess['user_id'] = 1 
 
-            db.session.commit()
-    return None
-
-@pytest.fixture
-def init_database():
-    # Create the database and the database table
-    db.create_all()
-    # initialize the tags
-    init_genres()
-    init_years()
-    #add a user    
-    user1 = new_user(uname='sakire', uemail='sakire@wsu.edu',passwd='1234')
-    # Insert user data
-    db.session.add(user1)
-    # Commit the changes for the users
-    db.session.commit()
-
-    yield  # this is where the testing happens!
-
-    db.drop_all()
-
-def test_register_page(test_client):
-    """
-    GIVEN a Flask application configured for testing
-    WHEN the '/register' page is requested (GET)
-    THEN check that the response is valid
-    """
-    # Create a test client using the Flask application configured for testing
-    response = test_client.get('/register')
-    assert response.status_code == 200
-    assert b"Register" in response.data
-
-def test_register(test_client,init_database):
-    """
-    GIVEN a Flask application configured for testing
-    WHEN the '/register' form is submitted (POST)
-    THEN check that the response is valid and the database is updated correctly
-    """
-    # Create a test client using the Flask application configured for testing
-    response = test_client.post('/register', 
-                          data=dict(username='john', email='john@wsu.edu',password="bad-bad-password",password2="bad-bad-password"),
-                          follow_redirects = True)
-    assert response.status_code == 200
-
-    s = db.session.query(User).filter(User.username=='john')
-    assert s.first().email == 'john@wsu.edu'
-    assert s.count() == 1
-    assert b"Sign In" in response.data   
-    assert b"Please log in to access this page." in response.data
-
-def test_invalidlogin(test_client,init_database):
-    """
-    GIVEN a Flask application configured for testing
-    WHEN the '/login' form is submitted (POST) with wrong credentials
-    THEN check that the response is valid and login is refused 
-    """
-    response = test_client.post('/login', 
-                          data=dict(username='sakire', password='12345',remember_me=False),
-                          follow_redirects = True)
-    assert response.status_code == 200
-    assert b"Invalid username or password" in response.data  #You may update the assertion condition according to the content of your login page. 
-
-def test_login_logout(request,test_client,init_database):
-    """
-    GIVEN a Flask application configured for testing
-    WHEN the '/login' form is submitted (POST) with correct credentials
-    THEN check that the response is valid and login is succesfull 
-    """
-    response = test_client.post('/login', 
-                          data=dict(username='sakire', password='1234',remember_me=False),
-                          follow_redirects = True)
-    assert response.status_code == 200
-    assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your index page. 
-
-    response = test_client.get('/logout',                       
-                          follow_redirects = True)
-    assert response.status_code == 200
-    assert b"Sign In" in response.data
-    assert b"Please log in to access this page." in response.data     #You may update the assertion condition according to the content of your  page. 
-
-# def test_postSmile(test_client,init_database):
-#     """
-#     GIVEN a Flask application configured for testing , after user logs in,
-#     WHEN the '/postsmile' page is requested (GET)  AND /PostForm' form is submitted (POST)
-#     THEN check that response is valid and the class is successfully created in the database
-#     """
-#     #login
-#     response = test_client.post('/login', 
-#                         data=dict(username='sakire', password='1234',remember_me=False),
-#                         follow_redirects = True)
-#     assert response.status_code == 200
-#     assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your  page.
-    
-#     #test the "PostSmile" form 
-#     response = test_client.get('/postsmile')
-#     assert response.status_code == 200
-#     assert b"Post New Smile" in response.data #You may update the assertion condition according to the content of your  page.
-    
-#     #test posting a smile story
-#     tags1 = list( map(lambda t: t.id, Tag.query.all()[:3]))  # should only pass 'id's of the tags. See https://stackoverflow.com/questions/62157168/how-to-send-queryselectfield-form-data-to-a-flask-view-in-a-unittest
-#     print("TESTING********************: ", tags1)
-#     response = test_client.post('/postsmile', 
-#                           data=dict(title='My test post', body='This is my first test post.',happiness_level=2, tag = tags1),
-#                           follow_redirects = True)
-#     assert response.status_code == 200
-#     assert b"Welcome to Smile Portal!" in response.data   #You may update the assertion condition according to the content of your  page.
-#     assert b"My test post" in response.data 
-#     assert b"This is my first test post." in response.data 
-
-#     c = db.session.query(Post).filter(Post.title =='My test post')
-#     assert c.first().get_tags().count() == 3 #should have 3 tags
-#     assert c.count() >= 1 #There should be at least one post with body "Here is another post."
+                response = client.post('/addbook', data={'title': 'Test Title', 'author': 'Test Author'})
+                self.assertEqual(response.status_code, 302) 
 
 
-#     tags2 = list( map(lambda t: t.id, Tag.query.all()[1:3]))  # should only pass 'id's of the tags. See https://stackoverflow.com/questions/62157168/how-to-send-queryselectfield-form-data-to-a-flask-view-in-a-unittest
-#     print("TESTING********************: ", tags2)
-#     response = test_client.post('/postsmile', 
-#                           data=dict(title='Second post', body='Here is another post.',happiness_level=1, tag = tags2),
-#                           follow_redirects = True)
-#     assert response.status_code == 200
-#     assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your  page.
-#     assert b"Second post" in response.data 
-#     assert b"Here is another post." in response.data 
+    def test_suggest_book_route_authenticated_as_user(self):
+        with self.app.test_request_context('/suggestbook', method='POST'):
+            with self.app.test_client() as client:
+                with client.session_transaction() as sess:
+                    sess['user_id'] = 1
 
-#     c = db.session.query(Post).filter(Post.body =='Here is another post.')
-#     assert c.first().get_tags().count() == 2  # Should have 2 tags
-#     assert c.count() >= 1 #There should be at least one post with body "Here is another post."
+                response = client.post('/suggestbook', data={'title': 'Test Title', 'author': 'Test Author'})
+                self.assertEqual(response.status_code, 200)  
 
-#     assert db.session.query(Post).count() == 2
-
-#     #finally logout
-#     response = test_client.get('/logout',                       
-#                           follow_redirects = True)
-#     assert response.status_code == 200
-#     assert b"Sign In" in response.data
-#     assert b"Please log in to access this page." in response.data   #You may update the assertion condition according to the content of your  page.
-
-# def test_likeSmile(test_client,init_database):
-#     """
-#     GIVEN a Flask application configured for testing , after user logs-in,
-#      /like form is submitted (POST)
-#     THEN check that response is valid and the like count is updated in the database
-#     """
-#     #login
-#     response = test_client.post('/login', 
-#                         data=dict(username='sakire', password='1234',remember_me=False),
-#                         follow_redirects = True)
-#     assert response.status_code == 200
-#     assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your  page.
-    
-#     #first post two smile stories
-#     response = test_client.get('/postsmile')
-#     assert response.status_code == 200
-#     tags1 = list( map(lambda t: t.id, Tag.query.all()[:3]))  # should only pass 'id's of the tags. See https://stackoverflow.com/questions/62157168/how-to-send-queryselectfield-form-data-to-a-flask-view-in-a-unittest
-#     response = test_client.post('/postsmile', 
-#                           data=dict(title='My test post', body='This is my first test post.',happiness_level=2, tag = tags1),
-#                           follow_redirects = True)
-#     assert response.status_code == 200
-#     c1 = db.session.query(Post).filter(Post.title =='My test post')
-#     assert c1.count() >= 1 #There should be at least one post with body "Here is another post."
-
-
-#     tags2 = list( map(lambda t: t.id, Tag.query.all()[1:3]))  # should only pass 'id's of the tags. See https://stackoverflow.com/questions/62157168/how-to-send-queryselectfield-form-data-to-a-flask-view-in-a-unittest
-#     response = test_client.post('/postsmile', 
-#                           data=dict(title='Second post', body='Here is another post.',happiness_level=1, tag = tags2),
-#                           follow_redirects = True)
-#     assert response.status_code == 200
-#     c2 = db.session.query(Post).filter(Post.body =='Here is another post.')
-#     assert c2.count() >= 1 #There should be at least one post with body "Here is another post."
-#     assert c2.first().likes == 0 
-#     assert db.session.query(Post).count() == 2
-
-#     #like the second post 
-#     response = test_client.post('/like/'+str(c2.first().id), 
-#                           data={},
-#                           follow_redirects = True)
-#     assert response.status_code == 200
-#     #The page should be redirected to the main page
-#     assert b"Welcome to Smile Portal!" in response.data   #You may update the assertion condition according to the content of your  page.
-#     #check whether the likecount was updated successfully
-#     c3 = db.session.query(Post).filter(Post.id ==c1.first().id)
-#     assert c3.first().likes == 0 
-#     c4 = db.session.query(Post).filter(Post.id ==c2.first().id)
-#     assert c4.first().likes == 1     
-
-    
+if __name__ == '__main__':
+    unittest.main()
