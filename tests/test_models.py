@@ -51,15 +51,15 @@ class TestModels(unittest.TestCase):
         db.session.commit()
 
         b1 = Book(title="Title", author="Author")
-        self.assertEqual(b1.get_reviews().all, [])
-        self.assertEqual(b1.get_reviews().all, [])
+        self.assertEqual(b1.reviews.all, [])
+        self.assertEqual(b1.reviews.all, [])
 
         r1 = Review(title="Review Title", body="Review body.")
         b1.reviews.append(r1)
-        self.assertEqual(b1.get_reviews().all, [r1])
-        self.assertEqual(b1.get_reviews().count(), 1)
-        self.assertEqual(b1.get_reviews().first().title, "Review Title")
-        self.assertEqual(b1.get_reviews().first().body, "Review body.")
+        self.assertEqual(b1.reviews.all, [r1])
+        self.assertEqual(b1.reviews.count(), 1)
+        self.assertEqual(b1.reviews.first().title, "Review Title")
+        self.assertEqual(b1.reviews.first().body, "Review body.")
 
 
 if __name__ == '__main__':
